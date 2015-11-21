@@ -1,0 +1,62 @@
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'View Address'; ">
+    <section class="box nobox margin-top-15 margin-bottom-0">
+        <div class="content-body">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-30 padding-left-20">
+                <table ng-if="_admin || _subscriber" class="table table-striped" st-table="displayedCollection" st-safe-src="addresses">
+                    <thead>
+                    <tr style="background:transparent">
+                        <th colspan="5">
+                            <span class="digit" ng-bind="addresses.length"></span>  Records
+                        </th>
+                        <th colspan="2" class="search">
+                            <input placeholder="Search for Address..." st-search="" type="search" class="form-control">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th ng-if="_admin || _subscriber" st-sort="masked_code">Masked Code</th>
+                        <th ng-if="_admin" st-sort="latitude">Latitude</th>
+                        <th ng-if="_admin" st-sort="longitude">Longitude</th>
+                        <th st-sort="city">City</th>
+                        <th st-sort="country">Country</th>
+                        <th st-sort="date_created">Created</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="address in displayedCollection">
+                        <td ng-if="_admin|| _subscriber" ng-bind="address.masked_code"></td>
+                        <td ng-if="_admin" ng-bind="address.latitude"></td>
+                        <td ng-if="_admin" ng-bind="address.longitude"></td>
+                        <td ng-bind="address.city"></td>
+                        <td ng-bind="address.country"></td>
+                        <td am-time-ago="address.date_created"></td>
+                        <td>
+                            <button class="btn btn-xs btn-danger" ng-click="edit()"><i class="typcn typcn-edit"></i>Edit</button>
+                            <button class="btn btn-xs btn-primary" ng-click="view(address)"><i class="typcn typcn-eye"></i>View</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th ng-if="_admin" st-sort="long_virtual_code">Long Virtual Code</th>
+                        <th ng-if="_admin" st-sort="latitude">Latitude</th>
+                        <th ng-if="_admin" st-sort="longitude">Longitude</th>
+                        <th st-sort="city">City</th>
+                        <th st-sort="country">Country</th>
+                        <th st-sort="date_created">Created</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="text-center navs">
+                            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+                <h3 style="text-align: center" ng-if="!_admin && !_subscriber">
+                  You are not autorized to view this information.
+                </h3>
+            </div>
+        </div>
+    </section>
+</div>

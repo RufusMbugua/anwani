@@ -20,7 +20,17 @@ module.exports = function(grunt) {
         }
       }
     },
-
+    "jsdoc-ng" : {
+      dist: {
+        src: ['public/admin-app'],
+        dest: 'build/docs',
+        readme: './README.md',
+        template: 'node_modules/angular-jsdoc/angular-template',
+        options: {
+          configure: 'node_modules/angular-jsdoc/common/conf.json'
+        }
+      }
+    },
     uglify: {
       dist: {
         files: {
@@ -71,7 +81,7 @@ module.exports = function(grunt) {
       server: {
         options: {
           hostname: 'localhost',
-          port: 8080
+          port: 9000
         }
       }
     },
@@ -164,8 +174,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-reload');
-
+  grunt.loadNpmTasks('grunt-jsdoc-ng');
+  grunt.registerTask('doc', ['jsdoc-ng']);
   grunt.registerTask('dev', ['connect:server', 'watch:dev']);
+
   grunt.registerTask('test', ['bower', 'jshint', 'karma:continuous']);
   grunt.registerTask('minified', ['bower', 'connect:server', 'watch:min']);
   grunt.registerTask('package', ['bower', 'html2js:dist', 'concat:dist',

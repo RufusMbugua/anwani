@@ -1,9 +1,41 @@
 # Changelog
 
+## 0.10.3 - 2015-09-05
+- Allow `amDateFormat` to work with custom formatted input date strings ([#162](https://github.com/urish/angular-moment/pull/162), contributed by [jblashka](https://github.com/jblashka))
+- `amAdd`, `amSubtract` - add/subtract a value from a given date ([#171](https://github.com/urish/angular-moment/pull/171), contributed by [nicholasruggeri](https://github.com/nicholasruggeri))
+- Bugfix: Timezones with a 'Z' somewhere in them all become UTC ([#168](https://github.com/urish/angular-moment/issues/168)).
+
+## 0.10.2 - 2015-07-28
+- Look for `moment` on the `global` object ([#133](https://github.com/urish/angular-moment/pull/133), contributed by [kitbrennan90](https://github.com/kitbrennan90))
+- Add support to use UTC offset timezones in addition to named timezones ([#151](https://github.com/urish/angular-moment/pull/151), contributed by [DiegoZoracKy](https://github.com/DiegoZoracKy))
+- Add timezone parameter for amCalendar filter ([#152](https://github.com/urish/angular-moment/pull/152), contributed by [DiegoZoracKy](https://github.com/DiegoZoracKy))
+- Add `from` parameter to the `amTimeAgo` filter ([#146](https://github.com/urish/angular-moment/pull/146), contributed by [pipo02mix](https://github.com/pipo02mix))
+
+## 0.10.1 - 2015-05-01
+- Fix broken SystemJS/JSPM support (see [#104](https://github.com/urish/angular-moment/issues/104))
+
+## 0.10.0 - 2015-04-10
+- Breaking change: removed one-time binding for `am-time-ago` in favor of AngularJS 1.3's one time binding ([#122](https://github.com/urish/angular-moment/issues/122))
+- Remove support for AngularJS 1.0.x and 1.1.x.
+- Support moment.js v2.10.x
+- Support for displaying full dates in `am-time-ago` (see [#75](https://github.com/urish/angular-moment/issues/75)) 
+- Support Angular Core's style CommonJS standard ([#123](https://github.com/urish/angular-moment/pull/123), contributed by [seanhealy](https://github.com/seanhealy))
+- Added an optional timezone parameter to amDateFormat ([#90](https://github.com/urish/angular-moment/pull/90), contributed by [robertbrooker](https://github.com/robertbrooker))
+
+## 0.9.2 - 2015-03-17
+- Critical fix: npm install angular-moment fails ([#121](https://github.com/urish/angular-moment/issues/121))
+
+## 0.9.1 - 2015-03-17
+- Add support for locale strings customization ([#102](https://github.com/urish/angular-moment/pull/102), contributed by [vosi](https://github.com/vosi))
+- Add `amDifference` filter ([#120](https://github.com/urish/angular-moment/pull/120), contributed by [ajhodges](https://github.com/ajhodges))
+- Support for changing the timezone via `amMoment.changeTimezone()` ([#92](https://github.com/urish/angular-moment/issues/92))
+- Support for AngularJS 1.4.x
+- Remove explicit module name for RequireJS ([#112](https://github.com/urish/angular-moment/pull/112), contributed by [WilliamCarter](https://github.com/WilliamCarter))
+
 ## 0.9.0 - 2015-01-11
 - Support moment.js v2.9.0. See [here](https://gist.github.com/ichernev/0c9a9b49951111a27ce7) for changelog.
 - Removed support for older moment.js versions. Only 2.8.0 and newer versions are now supported.
-- Removed deprecated method: `amMoment.changeLanguage()`. Use `amMoment.changeLocale() instead.
+- Removed deprecated method: `amMoment.changeLanguage()`. Use `amMoment.changeLocale()` instead.
 - Removed deprecated event: `amMoment:languageChange`. Listen for `amMoment:localeChange` instead.
 - Filters are now stateful by default (fixes [#97](https://github.com/urish/angular-moment/issues/97)).
 - The project is now available on [NuGet](https://www.nuget.org/packages/angular-moment/) ([#99](https://github.com/urish/angular-moment/pull/99), contributed by [markvp](https://github.com/markvp)).

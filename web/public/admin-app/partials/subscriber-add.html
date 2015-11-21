@@ -1,0 +1,66 @@
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'New Subscriber'; ">
+    <section class="box nobox margin-top-15 margin-bottom-0">
+        <div class="content-body">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-30 padding-left-20">
+                <form name="form" class="black">
+                    <div class="text-danger wrapper text-center" ng-show="authError">
+                        {{authError}}
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+
+                            <input type="text" class="input" ng-model="subscriber.name"
+                                   placeholder="Name"
+                                    />
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <input type="text" class="input" ng-model="subscriber.address" placeholder="Address"
+                                    />
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <input type="text" class="input" ng-model="subscriber.phone_number" placeholder="Phone Number"
+                                    />
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <input type="text" class="input" ng-model="subscriber.email" placeholder="Email"
+                                    />
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+
+                            <input type="password" name="log" class="input" ng-model="subscriber.password" placeholder="Password"
+                                    />
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <input type="file" name="name" class="input" ng-model="subscriber.logo"
+                                   placeholder="Logo"
+                                    />
+                        </p>
+                    </div>
+
+                    <div class="col-md-12">
+                        <p>
+
+                            <input type="text" class="input" ng-model="subscriber.website" placeholder="Website"
+                                    />
+                        </p>
+                    </div>
+                    <p class="submit">
+                        <button type="submit" name="wp-submit" id="wp-submit" class="btn btn-orange btn-block"
+                                ng-click="add()" ng-disabled='form.$invalid'>Create
+                        </button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

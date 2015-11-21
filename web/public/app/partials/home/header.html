@@ -15,14 +15,14 @@
     <form action=""class="navbar-form navbar-right">
       <label for="" translate>header.lang</label>
       <select class="form-control" name="" id="" ng-model="lang" ng-change="toggleLanguage(lang)"
-        ng-options="lang.label as lang.label for lang in languages">
+        ng-options="lang.value as lang.label for lang in languages">
       </select>
     </form>
   <ul class="nav navbar-nav navbar-right" >
     <li bs-scrollspy du-scrollspy du-smooth-scroll href="#home" data-target="#home"><a style="text-transform:uppercase !important" translate>header.links.one</a></li>
     <li bs-scrollspy du-scrollspy du-smooth-scroll href="#about" data-target="#about"><a style="text-transform:uppercase !important" translate>header.links.two</a></li>
     <li bs-scrollspy du-scrollspy du-smooth-scroll href="#features" data-target="#features"><a style="text-transform:uppercase !important" translate>header.links.three</a></li>
-    <li style="padding:10px 15px;margin-left:100px"><button href="" class="btn btn-warning btn-sm" translate>header.links.four</button></li>
+    <!--<li><a href="admin/#/login" class="btn btn-warning btn-sm" style="margin-top:10px;padding:5px;margin-left: 20px;" translate>header.links.four</a></li>-->
   </ul>
 
 </div>

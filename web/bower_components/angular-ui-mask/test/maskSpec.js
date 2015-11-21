@@ -204,11 +204,34 @@ describe("uiMask", function () {
     });
   });
 
+  describe("verify change is called", function () {
+    var input = undefined;
+    var doneCount = 0;
+    
+    beforeEach(function (done) {
+      input = compileElement(inputHtml);
+      scope.$apply("x = ''");
+      scope.$apply("mask = '**?9'");
+      input.on("change", function () {
+        doneCount++;
+        done();
+      });
+      input.val("aa").triggerHandler("input");
+      input.triggerHandler("blur");
+      input.val("aa").triggerHandler("input");
+      input.triggerHandler("blur");      
+    });
+
+    it("should have triggered change", function () {
+      expect(doneCount).toBe(1);
+    });
+  });
+
   describe("with model-view-value", function() {
     var input = undefined;
     beforeEach(function () {
       input = compileElement("<form name='test'><input name='input' ng-model='x' model-view-value='true' ui-mask='{{mask}}'></form>");
-      input = input.find('input')
+      input = input.find('input');
     });
     it("should set the mask in the model", function() {
       scope.$apply("x = '(a) b 1'");
@@ -351,6 +374,47 @@ describe("uiMask", function () {
       input.triggerHandler("input");
       expect(input.val()).toBe("(___) ___-____");
       expect(input.attr("placeholder")).toBe("Phone Number");
+    });
+
+    it("should accept ui-mask-placeholder-char", function() {
+      var placeholderHtml = "<input name='input' ng-model='x' ui-mask='{{mask}}' placeholder='Phone Number' ui-mask-placeholder ui-mask-placeholder-char='X'>",
+          input           = compileElement(placeholderHtml);
+
+      scope.$apply("x = ''");
+      scope.$apply("mask = '(999) 999-9999'");
+      input.triggerHandler("input");
+      expect(input.val()).toBe("(XXX) XXX-XXXX");
+      expect(input.attr("placeholder")).toBe("Phone Number");
+    });
+
+    it("should accept ui-mask-placeholder-char with value `space`", function() {
+      var placeholderHtml = "<input name='input' ng-model='x' ui-mask='{{mask}}' placeholder='Phone Number' ui-mask-placeholder ui-mask-placeholder-char='space'>",
+          input           = compileElement(placeholderHtml);
+
+      scope.$apply("x = ''");
+      scope.$apply("mask = '(999) 999-9999'");
+      input.triggerHandler("input");
+      expect(input.val()).toBe("(   )    -    ");
+      expect(input.attr("placeholder")).toBe("Phone Number");
+    });
+
+    it("should not override placeholder value when ui-mask-placeholder is not set and ui-mask-placeholder-char is `space`", function() {
+      var placeholderHtml = "<input name='input' ng-model='x' ui-mask='{{mask}}' placeholder='{{placeholder}}' ui-mask-placeholder-char='space'>",
+          input           = compileElement(placeholderHtml);
+
+      scope.$apply("x = ''");
+      scope.$apply("mask = '99/99/9999'");
+      scope.$apply("placeholder = 'DD/MM/YYYY'");
+      expect(input.attr("placeholder")).toBe("DD/MM/YYYY");
+
+      input.val("12").triggerHandler("input");
+      expect(input.val()).toBe("12/MM/YYYY");
+
+      scope.$apply("placeholder = 'MM/DD/YYYY'");
+      expect(input.val()).toBe("12/DD/YYYY");
+
+      input.triggerHandler("blur");
+      expect(input.attr("placeholder")).toBe("MM/DD/YYYY");
     })
   });
 

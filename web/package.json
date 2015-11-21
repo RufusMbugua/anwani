@@ -1,12 +1,14 @@
 {
-  "name": "buymore_coin",
+  "name": "anwani",
   "version": "0.0.1",
   "description": "Laravel and AngularJS on Materialize",
   "author": "Rufus Mbugua <mbuguarufus@gmail.com>",
-  "contributors": [{
-    "name": "Rufus Mbugua",
-    "email": "mbuguarufus@gmail.com"
-  }],
+  "contributors": [
+    {
+      "name": "Rufus Mbugua",
+      "email": "mbuguarufus@gmail.com"
+    }
+  ],
   "scripts": {},
   "main": "lib/foo.js",
   "repository": {
@@ -26,12 +28,12 @@
   "private": true,
   "dependecies": {},
   "devDependencies": {
+    "angular-jsdoc": "^1.2.1",
     "bower": "1.3.6",
     "grunt": "~0.4.5",
     "grunt-bower": "*",
     "grunt-bower-task": "~0.3.4",
     "grunt-cli": "~0.1.13",
-    "grunt-reload": ">0.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-compress": "~0.9.1",
     "grunt-contrib-concat": "~0.4.0",
@@ -41,13 +43,16 @@
     "grunt-contrib-uglify": "~0.5.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-html2js": "~0.2.7",
+    "grunt-jsdoc-ng": "0.0.3",
     "grunt-karma": "~0.8.0",
+    "grunt-reload": ">0.1",
+    "gulp": "^3.8.8",
+    "jsdoc": "^3.3.3",
     "karma": "~0.12.0",
     "karma-jasmine": "~0.1.0",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-phantomjs-launcher": "~0.1.4",
-    "tmp": "0.0.23",
-    "gulp": "^3.8.8",
-    "laravel-elixir": "*"
+    "laravel-elixir": "*",
+    "tmp": "0.0.23"
   }
 }

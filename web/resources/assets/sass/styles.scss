@@ -1,13 +1,13 @@
 $typl8-scale: (
-typl8-tera: 117,
-typl8-giga: 90,
-typl8-mega: 73,
-typl8-alpha: 61,
-typl8-beta: 33,
-typl8-gamma: 27,
-typl8-delta: 22,
-typl8-epsilon: 19,
-typl8-zeta: 15,
+        typl8-tera: 117,
+        typl8-giga: 90,
+        typl8-mega: 73,
+        typl8-alpha: 61,
+        typl8-beta: 33,
+        typl8-gamma: 27,
+        typl8-delta: 22,
+        typl8-epsilon: 19,
+        typl8-zeta: 15,
 ) !default;
 
 @import "bourbon/bourbon";
@@ -42,14 +42,11 @@ a.symbol:before {
   margin-right: 0.3em;
   @extend .typl8-beta;
 }
-a.symbol[title='circlefacebook']:before{
+a.symbol.facebook{
   color:#3b5998 !important;
 }
-a.symbol[title='circletwitterbird']:before{
+a.symbol.twitter{
   color:#55acee !important;
-}
-a.symbol[title='circlegoogleplus']:before{
-  color:#dc4e41 !important;
 }
 a.symbol:hover{
   text-decoration: none;
@@ -204,7 +201,7 @@ i.large{
   // height:5px;
   border-bottom:1px solid #f5f5f5;
 }
-div.white{
+div.white,table.white{
   background: white !important;
   border:1px solid #dadada;
   h1,h2,h3,h4,h5,h6{
@@ -221,6 +218,9 @@ footer{
   background: white !important;
   padding:2.5% 10%;
 }
+a.symbol{
+  font-size:2em;
+}
 a.rounded{
   padding:10px;
   margin-left:10px;
@@ -230,6 +230,76 @@ a.rounded{
     color:white !important;
   }
 }
+.btn.citizen {
+  background: #f4a704 !important;
+}
+.btn.business {
+  background: #3cbed5 !important;
+}
+.btn.government {
+  background: #354646 !important;
+}
+//Tables
+table{
+  @extend .table;
+  @extend .table-responsive;
+}
+table.features-table{
+  font-size:0.7em;
+  thead{
+    tr:first-child{
+      th:not(:first-child){
+        border:1px solid #dedede;
+      }
+    }
+    tr {
+      border: none;
+      th {
+        border: none;
+        text-align: center;
+      }
+      th.citizen {
+        background: #f4a704 !important;
+        color: white;
+      }
+      th.business {
+        background: #3cbed5 !important;
+        color: white;
+      }
+      th.government {
+        background: #354646 !important;
+        color: white;
+      }
+    }
+  }
+  tbody{
+    td{
+      text-align: center;
+      vertical-align:middle;
+      i.citizen{
+        color:#f4a704 !important;
+      }
+      i.business{
+        color:#3cbed5 !important;
+      }
+      i.government{
+        color:#354646 !important;
+      }
+    }
+  }
+  .btn-dark{
+    @extend .col-md-8;
+    @extend .col-md-offset-2;
+    border-radius:0;
+    color: white;
+  }
+  .btn-dark:hover{
+    @extend .col-md-10;
+    @extend .col-md-offset-1;
+    color:white;
+  }
+}
+
 // Mask
 .mask{
   position: relative;
@@ -310,12 +380,11 @@ img.play{
       margin:2em 0 !important;
     }
     .slighted-above{
-      margin:0;
+      margin-top:0;
       min-height:3em;
       img{
         padding:0 2%;
         width:40%;
-        margin:auto;
       }
     }
     span.black-text{

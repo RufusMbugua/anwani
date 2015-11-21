@@ -1,39 +1,140 @@
 'use strict';
 
-// Declare app level module which depends on views, and components
-var app = angular.module('admin', [
-  'ngAnimate',
-  //    'ngCookies',
-  //    'ngResource',
-  //    'ngSanitize',
-  'ngTouch',
-  //    'ngStorage',
-  'ui.router',
-  'ui.bootstrap',
-  // 'ui.utils',
-  'ui.load',
-  'ui.jq',
-  'oc.lazyLoad',
-  'perfect_scrollbar',
-  'angular-inview',
-  'angular-loading-bar'
+/**
+ * @ngdoc app AdminApp
+ * @name AnwaniAdmin
+ * @param ngAnimate {package}
+ * @param ngTouch {package}
+ * @param ui.router {package}
+ * @param ui.bootstrap {package}
+ * @param ui.load {package}
+ * @param ui.jq {package}
+ * @param oc.lazyload {package}
+ * @param perfect_scrollbar {package}
+ * @param angular-inview {package}
+ * @param angular-loading-bar {package}
+ * @param LocalStorageModule {package}
+ * @param smart-table {package}
+ * @param permission {package}
+ * @param uiGmapgoogle-maps {package}
+ * @param ui.mask {package}
+ * @param angularMoment {package}
+ */
+var app = angular.module('AdminApp', [
+    'ngAnimate',
+    //    'ngCookies',
+    //    'ngResource',
+    //    'ngSanitize',
+    'ngTouch',
+    //    'ngStorage',
+    'ui.router',
+    'ui.bootstrap',
+    // 'ui.utils',
+    'ui.load',
+    'ui.jq',
+    'oc.lazyLoad',
+    'perfect_scrollbar',
+    'angular-inview',
+    'angular-loading-bar',
+    'LocalStorageModule',
+    'smart-table',
+    'permission',
+    'uiGmapgoogle-maps',
+    'ui.mask',
+    'angularMoment'
 ]);
-
+app.config(function($httpProvider){
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    });
 app.config(
-  ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
-    function($controllerProvider, $compileProvider, $filterProvider, $provide) {
+    ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
+        function ($controllerProvider, $compileProvider, $filterProvider, $provide) {
 
-      // lazy controller, directive and service
-      app.controller = $controllerProvider.register;
-      app.directive = $compileProvider.directive;
-      app.filter = $filterProvider.register;
-      app.factory = $provide.factory;
-      app.service = $provide.service;
-      app.constant = $provide.constant;
-      app.value = $provide.value;
-    }
-  ]);
-;// lazyload config
+            // lazy controller, directive and service
+            app.controller = $controllerProvider.register;
+            app.directive = $compileProvider.directive;
+            app.filter = $filterProvider.register;
+            app.factory = $provide.factory;
+            app.service = $provide.service;
+            app.constant = $provide.constant;
+            app.value = $provide.value;
+        }
+    ]);
+
+app.run(
+    ['localStorageService', '$rootScope','$http','$state','Permission',
+        function (localStorageService, rootScope,http,state,Permission) {
+
+
+            var user = localStorageService.get('user');
+            var token = localStorageService.get('token');
+            rootScope.users=[];
+            rootScope.subscribers=[];
+            rootScope.addresses_shared = [];
+
+            if (!rootScope.user && !rootScope.token) {
+
+                http.defaults.headers.post = { "Content-Type": "application/json;charset=utf-8"};
+                http.defaults.headers.get = { "Content-Type": "application/json;charset=utf-8"};
+            }
+            if(user && token){
+                rootScope.user = user;
+                rootScope.token = token;
+                http.defaults.headers.post = { 'Authorization' : 'Bearer '+localStorageService.get('token') };
+                http.defaults.headers.get = { 'Authorization' : 'Bearer '+localStorageService.get('token') }
+            }
+
+
+            rootScope.logout = function logout()
+            {
+                localStorageService.remove('user');
+                localStorageService.remove('token');
+                state.go('login');
+                rootScope.user=null;
+                http.defaults.headers.post = { "Content-Type": "application/json;charset=utf-8"};
+                http.defaults.headers.get = { "Content-Type": "application/json;charset=utf-8"};
+
+            };
+            if(rootScope.user){
+                //console.log(rootScope.user);
+                if (rootScope.user.role) {
+                    if (rootScope.user.role == "subscriber") {
+                        rootScope._subscriber = true;
+                        rootScope._admin = false;
+
+                    }
+                    else if (rootScope.user.role == "admin") {
+                        rootScope._admin = true;
+                        rootScope._subscriber = false;
+                    }
+                }
+            }
+
+            Permission.defineRole('subscriber', function (stateParams) {
+                // If the returned value is *truthy* then the user has the role, otherwise they don't
+                if(rootScope.user){
+                    if (rootScope.user.role == "subscriber"){
+                        return true
+                    }
+                }
+                else{
+                    return false
+                }
+            })
+                .defineRole('admin', function (stateParams) {
+                    // If the returned value is *truthy* then the user has the role, otherwise they don't
+                    if(rootScope.user){
+                        if (rootScope.user.role == "admin"){
+                            return true
+                        }
+                    }
+                    else{
+                        return false
+                    }
+                });
+            rootScope.state = state;
+        }
+    ]);;// lazyload config
 
 app.constant('JQ_CONFIG', {
   easyPieChart: [
@@ -304,7 +405,87 @@ app.controller('AppCtrl', ['$scope',
 
   }
 ]);
-;app.controller('BlogPageCtrl', ['$scope', 'filterFilter', function ($scope, filterFilter) {
+;/**
+ * @ngdoc controller
+ * @name AddressesCtrl
+ * @memberof AdminApp
+ * @param $scope {service} controller scope
+ * @param $filterFilter {service}
+ * @param $http {service} Angular HTTP Request Service
+ * @param $rootScope {service} Angular Root Scope Service
+ * @param $state {service} UI Router State Service
+ */
+app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state',
+    function (scope, filterFilter,http,rootScope,state) {
+        /**
+         * Add an address
+         * @memberof AddressesCtrl
+         * @function add
+         */
+        scope.add = function add(){
+            /**
+             * @memberof add
+             * @param scope.address {object}
+             *
+             */
+            http.post('http://anwani-devapi.c4asolution.com/addresses/create',scope.address).then(function(result){
+                console.log(result);
+            });
+        };
+        /**
+         * View an address
+         * @memberof AddressesCtrl
+         * @function view
+         * @param address {object}  Instance of an Address parsed from the table
+         */
+        scope.view = function view(address){
+            rootScope.address=address;
+            state.go('app.address.one');
+        };
+        /**
+         * Search for an Address
+         * @memberof AddressesCtrl
+         * @function search
+         */
+        scope.search = function search(){
+            var criteria,category,search_string={};
+            category = scope.search_data.category;
+            criteria={};
+            search_string=scope.search_data.string;
+            criteria[category]=search_string;
+
+            http.get('http://anwani-devapi.c4asolution.com/addresses/search',{params:criteria})
+                .then(function(result){
+                    scope.results = result.data;
+                });
+        }
+
+    }]);
+
+/**
+ * @ngdoc runtime
+ * @name AddressesCtrlRuntime
+ * @memberof AdminApp
+ * @param $http {service}
+ * @param $rootScope {service}
+ */
+app.run(['$http','$rootScope',function(http,rootScope){
+    get_addresses();
+    function get_addresses(){
+        if(rootScope.user){
+            http.get('http://anwani-devapi.c4asolution.com/addresses',
+                {
+                    params:{
+                        page:1,
+                        per_page:10
+                    }
+                }
+            ).then(function(result){
+                    rootScope.addresses = result.data.docs;
+                });
+        }
+    }
+}]);;app.controller('BlogPageCtrl', ['$scope', 'filterFilter', function ($scope, filterFilter) {
 	$scope.items = [
 	{
 		"id": 1,
@@ -1535,9 +1716,9 @@ app.controller('FullcalendarCtrl', ['$scope', function($scope) {
 })();
 ;app.controller('ChatCtrl', ['$scope', '$http',
   function ($scope, $http) {
-    $http.get('data/chat-users.json').success(function(data) {
-      $scope.users = data;
-    });
+    //$http.get('data/chat-users.json').success(function(data) {
+    //  $scope.users = data;
+    //});
   }]);
 ;'use strict';
 
@@ -2229,26 +2410,92 @@ app.controller('FormValidationCtrl', ['$scope', function($scope) {
     angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
 }]);;'use strict';
 
-/* Controllers */
-  // signin controller
-app.controller('LoginFormController', ['$scope', '$http', '$state', function($scope, $http, $state) {
-    $scope.user = {};
-    $scope.authError = null;
-    $scope.login = function() {
-      $scope.authError = null;
-      // Try to login
-      $http.post('data/login.json', {email: $scope.user.email, password: $scope.user.password})
-      .then(function(response) {
-        if ( !response.data.user ) {
-          $scope.authError = 'Email or Password not right';
-        }else{
-          $state.go('app.dashboard');
+/**
+ * @ngdoc controller
+ * @name LoginCtrl
+ * @memberof AdminApp
+ * @param $scope {service} controller scope
+ * @param $http {service} Angular HTTP Request Service
+ * @param $state {service} UI Router State Service
+ * @param localStorageService {service} Stores Data in Local Storage / Sessions on the Browser
+ * @param $rootScope {service} Angular Root Scope Service
+ * @param Permission {service} Sets Access Permissions based on the user type
+ *
+ */
+app.controller('LoginCtrl', ['$scope', '$http', '$state', 'localStorageService', '$rootScope','Permission',
+    function (scope, http, state, localStorageService, rootScope,Permission) {
+        scope.subscriber = {};
+        rootScope._subscriber = false;
+        rootScope._admin = false;
+        scope.authError = null;
+        scope.login = function () {
+            scope.authError = null;
+            // Try to login
+            http.post('http://anwani-devapi.c4asolution.com/subscribers/login', scope.subscriber)
+                .then(function successCallback(response) {
+                    if (!response.data.subscriber) {
+                        scope.authError = 'Email or Password not right';
+                    } else {
+                        //console.log(response.data.subscriber);
+                        // User Object
+                        rootScope.user = response.data.subscriber;
+                        localStorageService.set('user', response.data.subscriber);
+
+                        // Token Object
+                        rootScope.token = response.data.token;
+                        localStorageService.set('token', response.data.token);
+
+                        http.defaults.headers.post = { 'Authorization' : 'Bearer '+localStorageService.get('token') };
+                        http.defaults.headers.get = { 'Authorization' : 'Bearer '+localStorageService.get('token') };
+
+                        if (rootScope.user.role) {
+                            if (rootScope.user.role == "subscriber") {
+                                rootScope._subscriber = true;
+                                rootScope._admin = false;
+                            }
+                            else if (rootScope.user.role == "admin") {
+                                rootScope._admin = true;
+                                rootScope._subscriber = false;
+                            }
+                        }
+                        state.go('app.dashboard');
+                        get_addresses();
+                        get_users();
+                        get_subscribers();
+                    }
+                }, function errorCallback(x) {
+                    scope.authError = x.data.error.message;
+                });
+
+        };
+
+        function get_users(){
+                http.get('http://anwani-devapi.c4asolution.com/users?page=1&per_page=10'
+                ).then(function(result){
+                        rootScope.users = result.data.docs;
+                    });
+
         }
-      }, function(x) {
-        $scope.authError = 'Server Error';
-      });
-    };
-  }])
+        function get_addresses(){
+                http.get('http://anwani-devapi.c4asolution.com/addresses',
+                    {
+                        params:{
+                            page:1,
+                            per_page:10
+                        }
+                    }
+                ).then(function(result){
+                        rootScope.addresses = result.data.docs;
+                    });
+
+        }
+        function get_subscribers(){
+            http.get('http://anwani-devapi.c4asolution.com/subscribers?page=1&per_page=10'
+            ).then(function(result){
+                    rootScope.subscribers = result.data.docs;
+                });
+        }
+    }])
 ;;app.controller('MailCtrl', ['$scope', function($scope) {
   $scope.folds = [{
     name: 'Inbox',
@@ -2365,6 +2612,18 @@ app.directive('labelColor', function() {
     });
   }
 });
+;app.controller('MapsCtrl',['$scope',function(scope){
+    scope.map = {
+        center:
+        {
+            latitude: -1.2833,
+            longitude: 36.8167
+        },
+        zoom: 7
+    };
+}]);
+
+
 ;app.controller('MembersCtrl', ['$scope', '$http',
   function ($scope, $http) {
     $http.get('data/members.json').success(function(data) {
@@ -2435,25 +2694,49 @@ app.controller('NotifyCtrl', function($scope,notify){
 });;'use strict';
 
 // signup controller
-app.controller('RegisterFormController', ['$scope', '$http', '$state', function($scope, $http, $state) {
-    $scope.user = {};
-    $scope.authError = null;
-    $scope.register = function() {
-      $scope.authError = null;
-      // Try to create
-      $http.post('data/register.json', {name: $scope.user.name, email: $scope.user.email, password: $scope.user.password})
-      .then(function(response) {
-        if ( !response.data.user ) {
-          $scope.authError = response;
-        }else{
-          $state.go('app.dashboard');
+app.controller('RegisterFormController', ['$scope', '$http', '$state', 'localStorageService', '$rootScope',
+    function (scope, http, state, localStorageService, rootScope) {
+        scope.subscriber = {};
+        scope.authError = null;
+
+        /**
+         * @description Register Regular User
+         */
+        scope.register = function () {
+            scope.authError = null;
+            // Try to create
+            http.post('http://anwani-devapi.c4asolution.com/subscribers/signup', scope.subscriber)
+                .then(function(response) {
+                    if (!response.data) {
+                        scope.authError = response;
+                    }else{
+                        rootScope.newUser = response.data;
+                        state.go('welcome');
+                    }
+                }, function(x) {
+                    scope.authError = 'Server Error';
+                });
+        };
+        /**
+         * @description Function for Registering a Subsriber
+         *
+         */
+        scope.registerSubscriber = function registerSubscriber(){
+
+            http.post('http://anwani-devapi.c4asolution.com/subscribers/signup', scope.subscriber)
+                .then(function(response) {
+                    if (!response.data) {
+                        scope.authError = response;
+                    }else{
+                        rootScope.newUser = response.data;
+                        state.go('welcome');
+                    }
+                }, function(x) {
+                    scope.authError = 'Server Error';
+                });
         }
-      }, function(x) {
-        $scope.authError = 'Server Error';
-      });
-    };
-  }])
- ;;/**
+    }])
+;;/**
  */
 
 'use strict';
@@ -3002,6 +3285,35 @@ app.controller('RickshawCtrl', ['$scope', '$interval', function($scope, $interva
 		$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
 		$scope.currentPage = 1;
 	}, true);
+}]);;app.controller('SubscribersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state',
+    function (scope, filterFilter,http,rootScope,state) {
+
+        scope.add = function add(){
+            http.post('http://anwani-devapi.c4asolution.com/subscribers/signup',scope.subscriber).then(function(result){
+                console.log(result);
+            });
+        };
+
+        scope.view = function view(subscriber){
+            rootScope.chosenSubscriber=subscriber;
+            state.go('app.subscriber.one');
+        };
+
+    }]);
+
+/**
+ * Get Subscribers on RUN
+ */
+app.run(['$http','$rootScope',function(http,rootScope){
+    if(rootScope.user) {
+        get_subscribers();
+    }
+    function get_subscribers(){
+        http.get('http://anwani-devapi.c4asolution.com/subscribers?page=1&per_page=10'
+        ).then(function(result){
+                rootScope.subscribers = result.data.docs;
+            });
+    };
 }]);;app.controller('ngGridDemoCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.filterOptions = {
         filterText: "",
@@ -3691,7 +4003,61 @@ app.controller('NotificationsDropDownCtrl', ['$scope', '$http',
     });
 
 });
-;'use strict';
+;/**
+ * @ngdoc controller
+ * @name UsersCtrl
+ * @memberof AdminApp
+ * @param $scope {service} controller scope
+ * @param $filterFilter {service}
+ * @param $http {service} Angular HTTP Request Service
+ * @param $rootScope {service} Angular Root Scope Service
+ * @param $state {service} UI Router State Service
+ */
+app.controller('UsersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state',
+    function (scope, filterFilter,http,rootScope,state) {
+
+        /**
+         * Add a user
+         * @memberof UsersCtrl
+         * @function add
+         */
+        scope.add = function add(){
+            http.post('http://anwani-devapi.c4asolution.com/users/signup',scope.user).then(function(result){
+                console.log(result);
+            });
+        };
+        /**
+         * View a user
+         * @memberof UsersCtrl
+         * @function view
+         * @param user {object}  Instance of a User parsed from the table
+         * @kind function
+         */
+        scope.view = function view(user){
+            rootScope.chosenUser=user;
+            state.go('app.users.one');
+        };
+    }]);
+
+/**
+ * @ngdoc runtime
+ * @name UsersCtrlRuntime
+ * @memberof AdminApp
+ * @param $http {service}
+ * @param $rootScope {service}
+ */
+app.run(['$http','$rootScope',function(http,rootScope){
+    get_users();
+    function get_users(){
+        if(rootScope.user){
+            http.get('http://anwani-devapi.c4asolution.com/users?page=1&per_page=10'
+            ).then(function(result){
+                    rootScope.users = result.data.docs;
+                });
+        }
+
+    }
+}]);;'use strict';
 
 // jVectorMap controller
 app.controller('JVectorMapDemoCtrl', ['$scope', function($scope) {
@@ -4607,52 +4973,186 @@ app.controller('MapCtrl', ['$scope', function ($scope) {
     'click dblclick');
 
 })();
-;app.config(['$stateProvider', '$urlRouterProvider', 'JQ_CONFIG',
-  function($stateProvider, $urlRouterProvider, JQ_CONFIG) {
+;/**
+ * @ngdoc config $stateProvider
+ * @memberof ClientApp
+ * @name stateProvider
+ * @param $stateProvider
+ * @param $urlRouterProvider
+ * @param JQ_CONFIG
+ */
+app.config(['$stateProvider', '$urlRouterProvider', 'JQ_CONFIG',
+    function($stateProvider, $urlRouterProvider, JQ_CONFIG) {
 
-    // For any unmatched url, redirect to /state1
-    /**
-     * Default Route
-     * @param  {[type]} "/account/expenditure" [description]
-     * @return {[type]}                        [description]
-     */
-    $urlRouterProvider.otherwise("/dashboard");
+        // For any unmatched url, redirect to /state1
+        /**
+         * @memberof stateProvider
+         * @name urlRouterProvider
+         * @param  /login {string} default route
+         * @return {[type]}
+         */
+        $urlRouterProvider.otherwise("/login");
 
-    // Now set up the states
-    /**
-     * [state description]
-     * @param  {[type]} 'test'       [description]
-     * @param  {[type]} {                                                            url: '/test' [description]
-     * @param  {[type]} views:       {                                                                          '':           {        controller: 'publicCtrl' [description]
-     * @param  {[type]} templateUrl: 'app/partials/public/index.html' [description]
-     * @param  {[type]} }                                                            }            }             [description]
-     * @return {[type]}              [description]
-     */
-    $stateProvider.state('app', {
-        templateUrl: '../admin-app/partials/app.html'
-      })
-        .state('app.dashboard', {
-          url: '/dashboard',
-          templateUrl: '../admin-app/partials/app_dashboard.html'
-          //resolve: {
-          //  deps: ['$ocLazyLoad',
-          //    function($ocLazyLoad) {
-          //      return $ocLazyLoad.load('chart.js').then(
-          //        function() {
-          //          return $ocLazyLoad.load(
-          //            'js/controllers/dashboard.js');
-          //        }
-          //      );
-          //    }
-          //  ]
-          //}
+        // Now set up the states
+        /**
+         * [state description]
+         * @param  {[type]} 'test'       [description]
+         * @param  {[type]} {                                                            url: '/test' [description]
+         * @param  {[type]} views:       {                                                                          '':           {        controller: 'publicCtrl' [description]
+         * @param  {[type]} templateUrl: 'app/partials/public/index.html' [description]
+         * @param  {[type]} }                                                            }            }             [description]
+         * @return {[type]}              [description]
+         */
+        $stateProvider.state('app', {
+            templateUrl: '../admin-app/partials/app.html'
         })
-        .state('login', {
-          url: '/login',
-          templateUrl: '../admin-app/partials/ui-login.html'
-        });
-  }
-])
+            .state('app.dashboard', {
+                url: '/dashboard',
+                views:{
+                    '':{
+                        templateUrl: '../admin-app/partials/app_dashboard.html'
+                    },
+                    'address-search@app.dashboard':{
+                        controller:'AddressesCtrl',
+                        templateUrl: '../admin-app/partials/addresses/card.html'
+                    }
+                },
+                //resolve: {
+                //  deps: ['$ocLazyLoad',
+                //    function($ocLazyLoad) {
+                //      return $ocLazyLoad.load('chart.js').then(
+                //        function() {
+                //          return $ocLazyLoad.load(
+                //            'js/controllers/dashboard.js');
+                //        }
+                //      );
+                //    }
+                //  ]
+                //}
+                data: {
+                    permissions: {
+                        only: ['admin', 'subscriber'],
+                        redirectTo:'login'
+                    }
+                }
+            })
+            .state('app.profile', {
+                url: '/profile',
+                templateUrl: '../admin-app/partials/ui-profile.html'
+            })
+            .state('welcome', {
+                url: '/welcome',
+                templateUrl: '../admin-app/partials/welcome.html'
+            })
+            .state('login', {
+                url: '/login',
+                templateUrl: '../admin-app/partials/ui-login.html'
+            })
+            .state('access',{
+
+            })
+            .state('not-authorized',{
+                url:'/not-authorized',
+                templateUrl:'../admin-app/partials/ui-not-authorized.html'
+            })
+            .state('register', {
+                url: '/register',
+                templateUrl: '../admin-app/partials/ui-register.html'
+            })
+            .state('forgot', {
+                url: '/forgot',
+                templateUrl: '../admin-app/partials/ui-forgotpwd.html'
+            })
+            .state('app.address', {
+                url:'/address',
+                controller:'AddressesCtrl',
+                templateUrl:'../admin-app/partials/address.html',
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo:'not-authorized'
+                    }
+                }
+            })
+            .state('app.address.new', {
+                url: '/new',
+                templateUrl: '../admin-app/partials/address-add.html'
+            })
+            .state('app.address.view', {
+                url: '/view',
+                templateUrl: '../admin-app/partials/address-view.html'
+            })
+            .state('app.address.one', {
+                url: '/one',
+                views:{
+                    '':{
+                        templateUrl: '../admin-app/partials/address-view-one.html'
+                    },
+                    'map@app.address.one':{
+                        controller:'MapsCtrl',
+                        templateUrl: '../admin-app/partials/ui-map.html'
+                    }
+                }
+            })
+            .state('app.subscriber', {
+                url:'/subscriber',
+                controller:'SubscribersCtrl',
+                templateUrl:'../admin-app/partials/subscriber.html',
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo:'not-authorized'
+                    }
+                }
+            })
+            .state('app.subscriber.new', {
+                url: '/new',
+                templateUrl: '../admin-app/partials/subscriber-add.html'
+            })
+            .state('app.subscriber.view', {
+                url: '/view',
+                templateUrl: '../admin-app/partials/subscriber-view.html'
+            })
+            .state('app.subscriber.one', {
+                url: '/one',
+                views:{
+                    '':{
+                        templateUrl: '../admin-app/partials/subscriber-view-one.html'
+                    }
+                }
+            })
+            .state('app.users', {
+                url: '/users',
+                controller:'UsersCtrl',
+                templateUrl: '../admin-app/partials/users.html',
+                data: {
+                    permissions: {
+                        only: ['admin','subscriber'],
+                        redirectTo:'not-authorized'
+                    }
+                }
+            })
+            .state('app.users.new', {
+                url: '/add',
+                templateUrl: '../admin-app/partials/users-add.html'
+            })
+            .state('app.users.view', {
+                url: '/view',
+                templateUrl: '../admin-app/partials/users-view.html'
+            })
+
+            .state('app.users.one', {
+                url: '/one',
+                templateUrl: '../admin-app/partials/users-view-one.html'
+            })
+            .state('app.map', {
+                url: '/map',
+                controller:"MapsCtrl",
+                templateUrl: '../admin-app/partials/ui-map.html'
+            })
+        ;
+    }
+]);
 ;// A RESTful factory for retreiving mails from 'mails.json'
 app.factory('mails', ['$http', function ($http) {
   var path = 'data/mail/mails.json';
@@ -4768,36 +5268,7 @@ angular.module('ui.load', [])
 			return deferred.promise;
 		};
 	}]);
-;angular.module('templates-dist', ['../public/app/partials/account/index.html', '../public/app/partials/account/login.html', '../public/app/partials/home/about.html', '../public/app/partials/home/banner.html', '../public/app/partials/home/features.html', '../public/app/partials/home/footer.html', '../public/app/partials/home/header.html', '../public/app/partials/home/index.html', '../public/app/partials/home/partners.html', '../public/app/partials/home/sub-header.html', '../public/app/partials/test/index.html']);
-
-angular.module("../public/app/partials/account/index.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("../public/app/partials/account/index.html",
-    "");
-}]);
-
-angular.module("../public/app/partials/account/login.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("../public/app/partials/account/login.html",
-    "<div class=\"full content\">\n" +
-    "  <form action=\"\" class=\"ui form\" class=\"left-form\" id=\"login\">\n" +
-    "    <h3 class=\"ui header\">\n" +
-    "      Login\n" +
-    "    </h3>\n" +
-    "    <div class=\"inner\">\n" +
-    "    <div class=\"ui input\">\n" +
-    "      <label for=\"\">Username</label>\n" +
-    "      <input type=\"text\" placeholder=\"John Doe\">\n" +
-    "    </div>\n" +
-    "    <div class=\"ui input\">\n" +
-    "      <label for=\"\">Password</label>\n" +
-    "      <input type=\"password\" placeholder=\"Enter Password Here...\">\n" +
-    "    </div>\n" +
-    "    <div class=\"ui green button\">Login</div>\n" +
-    "      </div>\n" +
-    "\n" +
-    "  </form>\n" +
-    "</div>\n" +
-    "");
-}]);
+;angular.module('templates-dist', ['../public/app/partials/home/about.html', '../public/app/partials/home/banner.html', '../public/app/partials/home/features.html', '../public/app/partials/home/footer.html', '../public/app/partials/home/header-clean.html', '../public/app/partials/home/header.html', '../public/app/partials/home/index.html', '../public/app/partials/home/partners.html', '../public/app/partials/home/pricing.html', '../public/app/partials/home/sub-header.html']);
 
 angular.module("../public/app/partials/home/about.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../public/app/partials/home/about.html",
@@ -4807,40 +5278,83 @@ angular.module("../public/app/partials/home/about.html", []).run(["$templateCach
     "    <div class=\"col-md-12\">\n" +
     "      <div class=\"col-md-4 slighted-above centered\">\n" +
     "        <span class=\"black-text\" translate>about.first.share</span>\n" +
-    "        <a style=href='#' class='symbol' title='circlefacebook'></a>\n" +
-    "        <a href='#' class='symbol' title='circletwitterbird'></a>\n" +
-    "        <a href='#' class='symbol' title='circlegoogleplus'></a>\n" +
+    "        <a class=\"symbol facebook\" href=\"https://www.facebook.com/Anwani-937650086328395/\">&#xe227;</a>\n" +
+    "        <a class=\"symbol twitter\" href=\"https://twitter.com/appanwani\">&#xe286;</a>\n" +
     "      </div>\n" +
     "      <div class=\"col-md-offset-8 centered col-md-4 slighted-above\">\n" +
-    "        <span class='black-text' translate>about.first.featured</span>\n" +
-    "        <img src=\"images/techcrunch.png\" alt=\"\">\n" +
-    "        <img src=\"images/techmoran.png\" alt=\"\">\n" +
+    "        <span style=\"display:block\" class='black-text' translate>about.first.featured</span>\n" +
+    "        <img  class=\"col-xs-4 col-xs-offset-4\" src=\"images/coders.png\" alt=\"\">\n" +
+    "        <!--<img src=\"images/techcrunch.png\" alt=\"\">-->\n" +
+    "        <!--<img src=\"images/techmoran.png\" alt=\"\">-->\n" +
     "      </div>\n" +
     "      <div class=\"col-md-offset-4 col-md-4\">\n" +
-    "        <h3 style=\"color:black !important\" class=\"centered\" translate>about.first.title</h3>\n" +
+    "        <h3 style=\"color:black !important;margin-top:70px\" class=\"centered\" translate>about.first.title</h3>\n" +
     "        <p class=\"centered gray-text\" translate>about.first.description</p>\n" +
     "      </div>\n" +
     "\n" +
     "    </div>\n" +
+    "\n" +
+    "    <div style=\"padding:0 15%\" class=\"row\">\n" +
+    "\n" +
+    "      <div class=\"col-md-12\" ng-if=\"currentLanguage=='en_US'\" style=\"padding:20px 0\">\n" +
+    "        <iframe style=\"margin:0 auto\" width=\"100%\" height=\"50%\" src=\"https://www.youtube.com/embed/kVgkBnyOkfA\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "      </div>\n" +
+    "      <div class=\"col-md-12\" ng-if=\"currentLanguage=='fre_FRE'\" style=\"padding:20px 0\">\n" +
+    "        <iframe style=\"margin:0 auto\" width=\"100%\" height=\"50%\" src=\"https://www.youtube.com/embed/_a6k0b1E55s\" frameborder=\"0\" allowfullscreen></iframe>\n" +
+    "      </div>\n" +
     "    <div class=\"col-md-4\">\n" +
-    "      <div class=\"circled\"><i class=\"\"></i></div>\n" +
-    "      <img src=\"images/physical.png\" alt=\"\" class=\"img-responsive\" style=\"margin:auto\">\n" +
-    "      <h5 class=\"centered black-text\" translate>about.second.col_1.title</h5>\n" +
-    "      <p class='black-text' translate>about.second.col_1.description\n" +
-    "      </p>\n" +
+    "    <div class=\"circled\"><i class=\"\"></i></div>\n" +
+    "    <img src=\"images/Anwani Citizen.png\" alt=\"\" class=\"img-responsive\" style=\"margin:auto\">\n" +
+    "    <h5 class=\"centered black-text\" translate>about.second.col_1.title</h5>\n" +
+    "      <div  class='col-xs-6 col-xs-offset-3 col-md-8 col-md-offset-2' style=\"padding:0;margin-bottom:10px\">\n" +
+    "        <!--href=\"mailto:contact@coders4africa.com?subject=Anwani Citizen\"-->\n" +
+    "        <a  ui-sref=\"pricing\" class='btn btn-default' style=\"width:100%\" translate>about.second.col_1.description\n" +
+    "        </a>\n" +
+    "      </div>\n" +
+    "\n" +
     "    </div>\n" +
     "    <div class=\"col-md-4\">\n" +
-    "      <div class=\"circled\"><i class=\"\"></i></div>\n" +
-    "      <img src=\"images/service_delivery.png\" alt=\"\" class=\"img-responsive\" style=\"margin:auto\">\n" +
-    "      <h5 class=\"centered black-text\" translate>about.second.col_2.title</h5>\n" +
-    "      <p class='black-text' translate>about.second.col_2.description</p>\n" +
+    "    <div class=\"circled\"><i class=\"\"></i></div>\n" +
+    "    <img src=\"images/Anwani Biz.png\" alt=\"\" class=\"img-responsive\" style=\"margin:auto\">\n" +
+    "    <h5 class=\"centered black-text\" translate>about.second.col_2.title</h5>\n" +
+    "      <div  class='col-xs-6 col-xs-offset-3 col-md-8 col-md-offset-2' style=\"padding:0;margin-bottom:10px\">\n" +
+    "        <!--href=\"mailto:contact@coders4africa.com?subject=Anwani Business\"-->\n" +
+    "        <a ui-sref=\"pricing\" class='btn btn-default' style=\"width:100%\" translate>about.second.col_2.description\n" +
+    "        </a>\n" +
+    "      </div>\n" +
     "    </div>\n" +
     "    <div class=\"col-md-4\">\n" +
-    "      <div class=\"circled\"><i class=\"\"></i></div>\n" +
-    "      <img src=\"images/citizen_empowerment.png\" alt=\"\" class=\"img-responsive\" style=\"margin:auto\">\n" +
-    "      <h5 class=\"centered black-text\" translate>about.second.col_3.title</h5>\n" +
-    "      <p class='black-text' translate>about.second.col_3.description</p>\n" +
+    "    <div class=\"circled\"><i class=\"\"></i></div>\n" +
+    "    <img src=\"images/Anwani Gov.png\" alt=\"\" class=\"img-responsive\" style=\"margin:auto\">\n" +
+    "    <h5 class=\"centered black-text\" translate>about.second.col_3.title</h5>\n" +
+    "      <div  class='col-xs-6 col-xs-offset-3 col-md-8 col-md-offset-2' style=\"padding:0;margin-bottom:10px\">\n" +
+    "        <!--href=\"mailto:contact@coders4africa.com?subject=Anwani Government\" -->\n" +
+    "        <a ui-sref=\"pricing\" class='btn btn-default' style=\"width:100%\" translate>about.second.col_3.description\n" +
+    "        </a>\n" +
+    "      </div>\n" +
     "    </div>\n" +
+    "    </div>\n" +
+    "    <!--<div class=\"col-md-4\">-->\n" +
+    "      <!--<div class=\"circled\"><i class=\"\"></i></div>-->\n" +
+    "      <!--<img src=\"images/physical.png\" alt=\"\" class=\"img-responsive\" style=\"margin:auto\">-->\n" +
+    "      <!--<h5 class=\"centered black-text\" translate>about.second.col_1.title</h5>-->\n" +
+    "      <!--<p class='black-text' translate>about.second.col_1.description-->\n" +
+    "      <!--</p>-->\n" +
+    "    <!--</div>-->\n" +
+    "    <!--<div class=\"col-md-4\">-->\n" +
+    "      <!--<div class=\"circled\"><i class=\"\"></i></div>-->\n" +
+    "      <!--<img src=\"images/service_delivery.png\" alt=\"\" class=\"img-responsive\" style=\"margin:auto\">-->\n" +
+    "      <!--<h5 class=\"centered black-text\" translate>about.second.col_2.title</h5>-->\n" +
+    "      <!--<p class='black-text' translate>about.second.col_2.description</p>-->\n" +
+    "    <!--</div>-->\n" +
+    "    <!--<div class=\"col-md-4\">-->\n" +
+    "      <!--<div class=\"circled\"><i class=\"\"></i></div>-->\n" +
+    "      <!--<img src=\"images/citizen_empowerment.png\" alt=\"\" class=\"img-responsive\" style=\"margin:auto\">-->\n" +
+    "      <!--<h5 class=\"centered black-text\" translate>about.second.col_3.title</h5>-->\n" +
+    "      <!--<p class='black-text' translate>about.second.col_3.description</p>-->\n" +
+    "    <!--</div>-->\n" +
+    "\n" +
+    "\n" +
     "  </div>\n" +
     "</div>\n" +
     "");
@@ -4863,8 +5377,11 @@ angular.module("../public/app/partials/home/banner.html", []).run(["$templateCac
     "      >\n" +
     "        <h5 class=\"white-text hidden-xs hidden-sm\" style=\"margin-bottom:0.2em\" translate>banner.col_2.title</h5>\n" +
     "        <p class=\"white-text hidden-xs hidden-sm\" translate>banner.col_2.description</p>\n" +
-    "        <button class=\"btn btn-default btn-large btn-blue hidden-xs hidden-sm\" translate>banner.col_2.button</button> <span class=\"white-text hidden-xs hidden-sm\" translate>banner.col_2.option</span>\n" +
-    "        <img src=\"images/google.png\" class=\"img-responsive play\" alt=\"\">\n" +
+    "        <!--<button class=\"btn btn-default btn-large btn-blue hidden-xs hidden-sm\" translate>banner.col_2.button</button> <span class=\"white-text hidden-xs hidden-sm\" translate>banner.col_2.option</span>-->\n" +
+    "        <a href=\"https://play.google.com/store/apps/details?id=com.coders4africa.app.anwani\">\n" +
+    "          <img alt=\"Get it on Google Play\"\n" +
+    "               src=\"https://developer.android.com/images/brand/en_generic_rgb_wo_45.png\" />\n" +
+    "        </a>\n" +
     "      </div>\n" +
     "      <div class=\"col-md-4 right\">\n" +
     "        <img\n" +
@@ -4884,7 +5401,7 @@ angular.module("../public/app/partials/home/features.html", []).run(["$templateC
     "<div class=\"row gray padded translate features\">\n" +
     "  <div class=\"col-md-12\">\n" +
     "    <h3 class=\"centered\" translate>features.top.title</h3>\n" +
-    "    <h4 class=\"gray\" translate>features.top.description</h4>\n" +
+    "    <h4 style=\"margin-bottom:50px\" class=\"gray\" translate>features.top.description</h4>\n" +
     "  </div>\n" +
     "  <div class=\"col-md-4 \" style=\"padding-top:30px\">\n" +
     "    <div class=\"col-md-12\">\n" +
@@ -4926,7 +5443,7 @@ angular.module("../public/app/partials/home/features.html", []).run(["$templateC
     "  data-start=\"width:20%\"\n" +
     "  data-40p-top=\"width:100%\"\n" +
     "  src=\"images/phone_image.png\" alt=\"\" class=\"img-responsive\" style=\"margin:auto\">\n" +
-    "<p class=\"gray-text centered\" translate>features.tertiary</p>\n" +
+    "<p class=\"gray-text centered\" style=\"font-size:0.8em\" translate>features.tertiary</p>\n" +
     "  </div>\n" +
     "\n" +
     "</div>\n" +
@@ -4938,16 +5455,50 @@ angular.module("../public/app/partials/home/footer.html", []).run(["$templateCac
     "<footer class=\"row white\">\n" +
     "  <div class=\"col-md-4 centered\">\n" +
     "    <span class=\"block gray-text\" translate>footer.col_1.description</span>\n" +
-    "    <a href='#' class='symbol' title='circlefacebook'></a>\n" +
-    "    <a href='#' class='symbol' title='circletwitterbird'></a>\n" +
-    "    <a href='#' class='symbol' title='circlegoogleplus'></a>\n" +
+    "    <a class=\"symbol facebook\" href=\"https://www.facebook.com/Anwani-937650086328395/\">&#xe227;</a>\n" +
+    "    <a class=\"symbol twitter\" href=\"https://twitter.com/appanwani\">&#xe286;</a>\n" +
     "  </div>\n" +
     "  <div class=\"col-md-4 centered right\">\n" +
     "    <span class=\"gray-text\" translate>footer.col_2.description</span>\n" +
-    "<img src=\"images/google.png\" class=\"img-responsive play\" alt=\"\">\n" +
+    "    <a href=\"https://play.google.com/store/apps/details?id=com.coders4africa.app.anwani\">\n" +
+    "      <img alt=\"Get it on Google Play\"\n" +
+    "           src=\"https://developer.android.com/images/brand/en_generic_rgb_wo_45.png\" />\n" +
+    "    </a>\n" +
     "  </div>\n" +
     "  <div class=\"col-md-4 centered right\"><span class=\"gray-text\" >Copyright &copy 2015 Anwani App</span> </div>\n" +
     "</footer>\n" +
+    "");
+}]);
+
+angular.module("../public/app/partials/home/header-clean.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("../public/app/partials/home/header-clean.html",
+    "<nav id=\"main\">\n" +
+    "  <div class=\"container-fluid\">\n" +
+    "    <div class=\"navbar-header\">\n" +
+    "      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n" +
+    "        <span class=\"sr-only\" translate>header.nav</span>\n" +
+    "        <span class=\"icon-bar\"></span>\n" +
+    "        <span class=\"icon-bar\"></span>\n" +
+    "        <span class=\"icon-bar\"></span>\n" +
+    "      </button>\n" +
+    "      <a class=\"navbar-brand\" ui-sref=\"home\">\n" +
+    "        <img src=\"images/anwani_logo.png\" style=\"width:100px\" class=\"img-responsive\" alt=\"\">\n" +
+    "      </a>\n" +
+    "    </div>\n" +
+    "  <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n" +
+    "    <form action=\"\"class=\"navbar-form navbar-right\">\n" +
+    "      <label for=\"\" translate>header.lang</label>\n" +
+    "      <select class=\"form-control\" name=\"\" id=\"\" ng-model=\"lang\" ng-change=\"toggleLanguage(lang)\"\n" +
+    "        ng-options=\"lang.value as lang.label for lang in languages\">\n" +
+    "      </select>\n" +
+    "    </form>\n" +
+    "  <ul class=\"nav navbar-nav navbar-right\" >\n" +
+    "    <li ui-sref=\"home\"><a style=\"text-transform:uppercase !important\" translate>header.links.one</a></li>\n" +
+    "  </ul>\n" +
+    "\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "</nav>\n" +
     "");
 }]);
 
@@ -4970,14 +5521,14 @@ angular.module("../public/app/partials/home/header.html", []).run(["$templateCac
     "    <form action=\"\"class=\"navbar-form navbar-right\">\n" +
     "      <label for=\"\" translate>header.lang</label>\n" +
     "      <select class=\"form-control\" name=\"\" id=\"\" ng-model=\"lang\" ng-change=\"toggleLanguage(lang)\"\n" +
-    "        ng-options=\"lang.label as lang.label for lang in languages\">\n" +
+    "        ng-options=\"lang.value as lang.label for lang in languages\">\n" +
     "      </select>\n" +
     "    </form>\n" +
     "  <ul class=\"nav navbar-nav navbar-right\" >\n" +
     "    <li bs-scrollspy du-scrollspy du-smooth-scroll href=\"#home\" data-target=\"#home\"><a style=\"text-transform:uppercase !important\" translate>header.links.one</a></li>\n" +
     "    <li bs-scrollspy du-scrollspy du-smooth-scroll href=\"#about\" data-target=\"#about\"><a style=\"text-transform:uppercase !important\" translate>header.links.two</a></li>\n" +
     "    <li bs-scrollspy du-scrollspy du-smooth-scroll href=\"#features\" data-target=\"#features\"><a style=\"text-transform:uppercase !important\" translate>header.links.three</a></li>\n" +
-    "    <li style=\"padding:10px 15px;margin-left:100px\"><button href=\"\" class=\"btn btn-warning btn-sm\" translate>header.links.four</button></li>\n" +
+    "    <!--<li><a href=\"admin/#/login\" class=\"btn btn-warning btn-sm\" style=\"margin-top:10px;padding:5px;margin-left: 20px;\" translate>header.links.four</a></li>-->\n" +
     "  </ul>\n" +
     "\n" +
     "</div>\n" +
@@ -4995,7 +5546,18 @@ angular.module("../public/app/partials/home/index.html", []).run(["$templateCach
     "<div ui-view=\"partners\"></div>\n" +
     "<div ui-view=\"sub-header\"></div>\n" +
     "<div ui-view=\"footer\"></div>\n" +
-    "");
+    "<script>\n" +
+    "    $(document).ready(function(){\n" +
+    "        adjustHeights('nav a');\n" +
+    "        function adjustHeights(elem) {\n" +
+    "            var fontstep = 2;\n" +
+    "            if ($(elem).height()>$(elem).parent().height() || $(elem).width()>$(elem).parent().width()) {\n" +
+    "                $(elem).css('font-size',(($(elem).css('font-size').substr(0,2)-fontstep)) + 'px').css('line-height',(($(elem).css('font-size').substr(0,2))) + 'px');\n" +
+    "                adjustHeights(elem);\n" +
+    "            }\n" +
+    "        }\n" +
+    "    })\n" +
+    "</script>");
 }]);
 
 angular.module("../public/app/partials/home/partners.html", []).run(["$templateCache", function($templateCache) {
@@ -5005,19 +5567,83 @@ angular.module("../public/app/partials/home/partners.html", []).run(["$templateC
     "    <h4 class=\"gray-text centered\" translate>partners</h4>\n" +
     "    <div class=\"seperator\"></div>\n" +
     "    <div class=\"col-md-4 col-md-offset-4 row images\">\n" +
-    "    <img class=\"col-xs-4\" src=\"images/unhcr.png\" alt=\"\">\n" +
-    "    <img class=\"col-xs-4\" src=\"images/coders.png\" alt=\"\">\n" +
-    "    <img class=\"col-xs-4\" src=\"images/techmoran.png\" alt=\"\">\n" +
+    "    <!--<img class=\"col-xs-4\" src=\"images/unhcr.png\" alt=\"\">-->\n" +
+    "    <img class=\"col-xs-4 col-xs-offset-4\" src=\"images/coders.png\" alt=\"\">\n" +
+    "    <!--<img class=\"col-xs-4\" src=\"images/techmoran.png\" alt=\"\">-->\n" +
     "    </div>\n" +
     "  </div>\n" +
     "</div>\n" +
     "");
 }]);
 
+angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("../public/app/partials/home/pricing.html",
+    "<div ui-view=\"header\" autoscroll=\"true\"></div>\n" +
+    "<div class=\"row padded\">\n" +
+    "    <div class=\"col-md-12 white padded\">\n" +
+    "        <div class=\"inner\">\n" +
+    "            <table class=\"features-table table retable\" data-retable-type=\"row\">\n" +
+    "                <thead>\n" +
+    "                <tr>\n" +
+    "                    <th></th>\n" +
+    "                    <th translate>pricing.header.first.one</th>\n" +
+    "                    <th translate>pricing.header.first.two</th>\n" +
+    "                    <th translate>pricing.header.first.three</th>\n" +
+    "                </tr>\n" +
+    "                <tr>\n" +
+    "                    <th></th>\n" +
+    "                    <th class=\"citizen\" translate>pricing.header.second.one</th>\n" +
+    "                    <th class=\"business\" translate>pricing.header.second.two</th>\n" +
+    "                    <th class=\"government\" translate>pricing.header.second.three</th>\n" +
+    "                </tr>\n" +
+    "                <tr>\n" +
+    "                    <th></th>\n" +
+    "                    <th translate>pricing.header.third.one</th>\n" +
+    "                    <th translate>pricing.header.third.two</th>\n" +
+    "                    <th translate>pricing.header.third.three</th>\n" +
+    "                </tr>\n" +
+    "                </thead>\n" +
+    "                <tbody>\n" +
+    "                <tr ng-repeat=\"feature in features\">\n" +
+    "                    <td style=\"text-align: left;width:25%\">\n" +
+    "                        <div ng-bind=\"feature.title\"></div>\n" +
+    "                        <div ng-bind=\"feature.subtitle\" class=\"gray-text\"></div>\n" +
+    "                    </td>\n" +
+    "                    <td valign=\"middle\">\n" +
+    "                        <i ng-if=\"feature.citizen\" class=\"ion-checkmark citizen\"></i>\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        <i ng-if=\"feature.business\" class=\"ion-checkmark business\"></i>\n" +
+    "                    </td>\n" +
+    "                    <td>\n" +
+    "                        <i ng-if=\"feature.government\" class=\"ion-checkmark government\"></i>\n" +
+    "                    </td>\n" +
+    "                </tr>\n" +
+    "                </tbody>\n" +
+    "                <tfoot>\n" +
+    "                <td></td>\n" +
+    "                <td>\n" +
+    "                    <a class=\"btn btn-dark citizen\" translate>pricing.footer.one</a>\n" +
+    "                </td>\n" +
+    "                <td>\n" +
+    "                    <a href=\"mailto:contact@coders4africa.com?subject=Anwani Business\" class=\"btn btn-dark business\" translate>pricing.footer.two</a>\n" +
+    "                </td>\n" +
+    "                <td>\n" +
+    "                    <a href=\"mailto:contact@coders4africa.com?subject=Anwani Government\" class=\"btn btn-dark government\" translate>pricing.footer.three</a>\n" +
+    "                </td>\n" +
+    "                </tfoot>\n" +
+    "            </table>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<div ui-view=\"sub-header\"></div>\n" +
+    "<div ui-view=\"footer\"></div>");
+}]);
+
 angular.module("../public/app/partials/home/sub-header.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("../public/app/partials/home/sub-header.html",
     "<div class=\"row\">\n" +
-    "  <nav id=\"sub\" class=\"col-md-4 col-md-offset-4\">\n" +
+    "  <nav id=\"sub\" class=\"col-md-6 col-md-offset-3\">\n" +
     "    <ul class=\"nav navbar-nav row\" style=\"width:100%\">\n" +
     "      <li class=\"col-xs-4\" bs-scrollspy du-scrollspy du-smooth-scroll href=\"#home\" data-target=\"#home\"><a class=\"centered\" translate>header.links.one</a></li>\n" +
     "      <li class=\"col-xs-4\" bs-scrollspy du-scrollspy du-smooth-scroll href=\"#about\" data-target=\"#about\"><a class=\"centered\" translate>header.links.two</a></li>\n" +
@@ -5025,11 +5651,5 @@ angular.module("../public/app/partials/home/sub-header.html", []).run(["$templat
     "    </ul>\n" +
     "  </nav>\n" +
     "</div>\n" +
-    "");
-}]);
-
-angular.module("../public/app/partials/test/index.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("../public/app/partials/test/index.html",
-    "<h1>Test Page</h1>\n" +
     "");
 }]);

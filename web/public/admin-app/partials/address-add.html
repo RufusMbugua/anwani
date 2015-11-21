@@ -1,0 +1,21 @@
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'New Address'; ">
+    <section class="box nobox margin-top-15 margin-bottom-0">
+        <div class="content-body">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-30 padding-left-20">
+                <form  action="" class="black form-validation">
+                    <div class="col-md-6">
+                        <input ng-model="address.easy" type="text" placeholder="Easy to Remember Name">
+                    </div>
+                    <div class="col-md-6">
+                        <input ng-model="address.location" type="text" placeholder="Location Plus Code">
+                    </div>
+                    <p class="submit">
+                        <button type="submit" name="wp-submit" id="wp-submit" class="btn btn-orange btn-block"
+                                ng-click="add()" ng-disabled='form.$invalid'>Add Address
+                        </button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

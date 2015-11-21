@@ -4,7 +4,7 @@
     "links": {
       "one": "Accueil",
       "two": "A Propos",
-      "three": "Caracteristiques et fonctionnalitÈs",
+      "three": "Caracteristiques",
       "four": "Se Connecter/S'Inscrire"
     },
     "lang": "Langage"
@@ -12,71 +12,71 @@
   "banner": {
     "col_1": {
       "title": "Bienvenue sur Anwani",
-      "description": "L'application qui vous permet de crÈer une adresse rÈelle en moins d'une minute..."
+      "description": "L'application qui vous permet de cr&eacute;er une adresse r&eacute;elle en moins d'une minute..."
     },
     "col_2": {
       "title": "C'est simple",
-      "description": "CrÈer votre adresse ou voir celles qui existent dÈj‡",
-      "button": "DÈmarrer!",
+      "description": "Cr&eacute;er votre adresse ou voir celles qui existent d&eacute;j&aacute;",
+      "button": "D&eacute;marrer!",
       "option": "OU"
     }
   },
   "about": {
     "first": {
       "share": "Partager sur",
-      "featured": "En premier page",
+      "featured": "En premi&egrave;re page",
       "title": "A propos de  Anwani",
-      "description": "Lorem ipsum dolor sit amet."
+      "description": ""
     },
     "second": {
       "col_1": {
-        "title": "Addresse physique pour tous",
-        "description": "Pour la premiËre fois, tous les citoyens africains, qu'ils soient en ville ou dans une cabane quelque part dans un village auront l'opportunitÈ d'avoir une adresse physique "
+        "title": "Anwani Citizen",
+        "description": "Learn More"
       },
       "col_2": {
-        "title": "Service de Livraison",
-        "description": "L'Adresse peut Ítre fourni par l'utilisateur pour les fournisseurs de services,une compagnie d 'ÈlectricitÈ par exemple pour Ítre en mesure de les servir plus efficacement, car ils trouveront l'adresse facilement et rapidement."
+        "title": "Anwani Business",
+        "description": "Learn More"
       },
       "col_3": {
-        "title": "L'autonomisation des citoyens",
-        "description": "En tant que citoyens, les utilisateurs peuvent utiliser Anwani pour participer ‡ diverses activitÈs, comme le vote et d'autres activitÈs nationaux "
+        "title": "Anwani Government",
+        "description": "Learn More"
       }
     }
   },
   "features": {
     "top": {
-      "title": "Caracteristiques de l'application Anwani en detail",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+      "title": "Anwani Features in detail",
+      "description": "Anwani is available in 3 versions for individual citizens, businesses and government."
     },
     "first": {
       "col_1": {
-        "title": "CrÈer une addresse",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque quis eos hic. Accusantium, asperiores, hic! Consectetur repellat quos est recusandae modi expedita obcaecati beatae enim. Error esse deleniti possimus obcaecati."
+        "title": "Create Address",
+        "description": "Seamlessly create an address for any of your residences or businesses."
       },
       "col_2": {
-        "title": "Voir les addresses existantes",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur voluptas rerum at quaerat placeat! Officia perspiciatis sint voluptates, minima eius sunt. A  dipisci nulla ut magnam illum et soluta optio autem."
+        "title": "View Existing Address",
+        "description": "Any individual, business or government entity can view their own address or an address that has been shared with them."
       },
       "col_3": {
-        "title": "Gerer les Addresses",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, hic dignissimos eveniet amet quisquam ad dolorem   voluptates iste, dicta incidunt error dolore quas magnam rerum odit quis repellat cupiditate recusandae!"
+        "title": "Manage Address",
+        "description": "Any individual, business or government entity can manage their multiple addresses anytime on the fly and have it updated in the cloud instantaneously."
       }
     },
     "second": {
       "col_1": {
-        "title": "Utilisateur et Addresse PartagÈe",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit deleniti odio ab sint labore asperiores, culpa maiores esse cumque, ducimus rerum et provident quasi. Sint soluta ut reprehenderit, aspernatur libero."
+        "title": "User & Share Address",
+        "description": "Organizing an event? Have an eCommerce site and want to start door-to-door delivery? It's simple, share your address in our app!"
       },
       "col_2": {
-        "title": "Ajouter la photo de la localitÈ",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, molestias saepe. Eum vero porro quia, facilis magnam eligendi ratione ipsa eveniet, accusantium aliquid laboriosam praesentium! Recusandae nisi necessitatibus alias voluptas."
+        "title": "Add Locational Photo",
+        "description": "Not only can you create an address but you also have the option to add a picture of your residence/business in seconds."
       },
       "col_3": {
-        "title": "Addresse reÁu",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum beatae sint, odio dicta neque, natus labore magni, dolore, nulla incidunt ducimus. Perferendis provident minima, nam consectetur quae aspernatur beatae fugiat!"
+        "title": "Address Receipt",
+        "description": "Receive a digital receipt of your address creation and ensure no one else can duplicate or copy yours."
       }
     },
-    "tertiary": "* Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+    "tertiary": "* The Anwani business and government APPs are not available in the Google playstore. Please contact <a href='mailto:contact@coders4africa.com'>contact@coders4africa.com</a> to get those APPs."
   },
   "footer": {
     "col_1": {
@@ -86,7 +86,7 @@
       "description": "Recevoir l'application Anwani"
     },
     "col_3": {
-      "description": "Tous droits reservÈs ‡ Anwani App 2015"
+      "description": "Tous droits reserv&eacute;s � Anwani App 2015"
     }
   },
   "partners": "Nos Partenaires"

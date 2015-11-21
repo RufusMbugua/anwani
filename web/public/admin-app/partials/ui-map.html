@@ -1,0 +1,20 @@
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'View Map'; ">
+    <section class="box nobox margin-top-15 margin-bottom-0">
+        <div class="content-body">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-30 padding-left-20">
+                <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+                    <ui-gmap-marker ng-if="!address" ng-repeat="address in addresses"
+                            idKey='address._id'
+                            coords='address'
+                            >
+                    </ui-gmap-marker>
+                    <ui-gmap-marker ng-if="address"
+                                    idKey='address._id'
+                                    coords='address'
+                            >
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
+            </div>
+        </div>
+    </section>
+</div>

@@ -60,6 +60,11 @@ angular.module('ui.mask', [])
                                     iElement.val(maskValue(unmaskValue(iElement.val())));
                                 }
                             }
+
+                            function initPlaceholderChar() {
+                                return initialize(iAttrs.uiMask);
+                            }
+
                             var modelViewValue = false;
                             iAttrs.$observe('modelViewValue', function(val) {
                                 if (val === 'true') {
@@ -131,6 +136,10 @@ angular.module('ui.mask', [])
                             else {
                                 iAttrs.$observe('placeholder', initPlaceholder);
                             }
+                            if (angular.isDefined(iAttrs.uiMaskPlaceholderChar)) {
+                                iAttrs.$observe('uiMaskPlaceholderChar', initPlaceholderChar);
+                            }
+
                             controller.$formatters.push(formatter);
                             controller.$parsers.push(parser);
 
@@ -242,12 +251,14 @@ angular.module('ui.mask', [])
                             }
 
                             function getPlaceholderChar(i) {
-                                var placeholder = angular.isDefined(iAttrs.uiMaskPlaceholder) ? iAttrs.uiMaskPlaceholder : iAttrs.placeholder;
+                                var placeholder = angular.isDefined(iAttrs.uiMaskPlaceholder) ? iAttrs.uiMaskPlaceholder : iAttrs.placeholder,
+                                    defaultPlaceholderChar;
 
                                 if (typeof placeholder !== 'undefined' && placeholder[i]) {
                                     return placeholder[i];
                                 } else {
-                                    return '_';
+                                    defaultPlaceholderChar = angular.isDefined(iAttrs.uiMaskPlaceholderChar) && iAttrs.uiMaskPlaceholderChar ? iAttrs.uiMaskPlaceholderChar : '_';
+                                    return (defaultPlaceholderChar.toLowerCase() === 'space') ? ' ' : defaultPlaceholderChar[0];
                                 }
                             }
 
@@ -306,7 +317,8 @@ angular.module('ui.mask', [])
                                 maskComponents = getMaskComponents();
                                 maskProcessed = maskCaretMap.length > 1 ? true : false;
                             }
-
+                            
+                            var prevValue = iElement.val(); 
                             function blurHandler() {
                                 if (linkOptions.clearOnBlur) {
                                     oldCaretPosition = 0;
@@ -319,7 +331,34 @@ angular.module('ui.mask', [])
                                         });
                                     }
                                 }
+                                //Check for different value and trigger change.
+                                if (value !== prevValue) {
+                                    triggerChangeEvent(iElement[0]);
+                                }
+                                prevValue = value;
                             }
+                            
+                            function triggerChangeEvent(element) {
+                          		var change;
+                          		if (typeof window.Event == 'function' && !element.fireEvent) {
+                          			// modern browsers and Edge
+                          			change = new Event('change', {
+                          				view: window,
+                          				bubbles: true,
+                          				cancelable: false
+                          			});
+                          			element.dispatchEvent(change);
+                          		} else if ('createEvent' in document) {
+                          			// older browsers
+                          			change = document.createEvent('HTMLEvents');
+                          			change.initEvent('change', false, true);
+                          			element.dispatchEvent(change);
+                          		}
+                          		else if (element.fireEvent) {
+                          			// IE <= 11
+                          			element.fireEvent('onchange');
+                          		}
+                          	}
 
                             function mouseDownUpHandler(e) {
                                 if (e.type === 'mousedown') {

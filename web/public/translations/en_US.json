@@ -16,7 +16,7 @@
     },
     "col_2": {
       "title": "It's simple",
-      "description": "Create your address or view existing ones",
+      "description": "Create an address or find one",
       "button": "Get Started!",
       "option": "OR"
     }
@@ -26,57 +26,84 @@
       "share": "Share on",
       "featured": "Featured on",
       "title": "About Anwani",
-      "description": "Lorem ipsum dolor sit amet."
+      "description": ""
     },
     "second": {
       "col_1": {
-        "title": "Physical Address for All",
-        "description": "For the first time, every African citizens whether they live in the city or in a hut somewhere in a village will have the oportunity to own a physical address."
+        "title": "Anwani Citizen",
+        "description": "Learn More"
       },
       "col_2": {
-        "title": "Service Delivery",
-        "description": "Address can be provided by user to service providers, e.g. electric company to be able to service them more efficiently because they will find the address easier and faster. "
+        "title": "Anwani Business",
+        "description": "Learn More"
       },
       "col_3": {
-        "title": "Citizen Empowerment",
-        "description": "As citizens, users can utilise Anwani to partake in various responsibilities as citizens such as voting and other national registrations"
+        "title": "Anwani Government",
+        "description": "Learn More"
       }
     }
   },
   "features": {
     "top": {
-      "title": "Anwani Features in detail",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+      "title": "Anwani Features in Detail",
+      "description": ""
     },
     "first": {
       "col_1": {
         "title": "Create Address",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque quis eos hic. Accusantium, asperiores, hic! Consectetur repellat quos est recusandae modi expedita obcaecati beatae enim. Error esse deleniti possimus obcaecati."
+        "description": "Create an address for your residence or (place of ) business."
       },
       "col_2": {
         "title": "View Existing Address",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur voluptas rerum at quaerat placeat! Officia perspiciatis sint voluptates, minima eius sunt. A  dipisci nulla ut magnam illum et soluta optio autem."
+        "description": "View your own address or an address that has been shared with you."
       },
       "col_3": {
         "title": "Manage Address",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, hic dignissimos eveniet amet quisquam ad dolorem   voluptates iste, dicta incidunt error dolore quas magnam rerum odit quis repellat cupiditate recusandae!"
+        "description": "Manage and update multiple addresses."
       }
     },
     "second": {
       "col_1": {
-        "title": "User & Share Address",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit deleniti odio ab sint labore asperiores, culpa maiores esse cumque, ducimus rerum et provident quasi. Sint soluta ut reprehenderit, aspernatur libero."
+        "title": "Share Address",
+        "description": "Share your address with other users of Anwani."
       },
       "col_2": {
-        "title": "Add Locational Photo",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, molestias saepe. Eum vero porro quia, facilis magnam eligendi ratione ipsa eveniet, accusantium aliquid laboriosam praesentium! Recusandae nisi necessitatibus alias voluptas."
+        "title": "Upload Location Image ",
+        "description": "Add a picture of your residence/place of business."
       },
       "col_3": {
         "title": "Address Receipt",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum beatae sint, odio dicta neque, natus labore magni, dolore, nulla incidunt ducimus. Perferendis provident minima, nam consectetur quae aspernatur beatae fugiat!"
+        "description": "Receive a digital receipt/proof of address ownership."
       }
     },
-    "tertiary": "* Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+    "tertiary": "* The Anwani business and government APPs are not available in the Google playstore. Please contact <a href='mailto:contact@coders4africa.com'>contact@coders4africa.com</a> to get those APPs."
+  },
+  "pricing":{
+    "header":{
+      "first":{
+        "one":"Citizen",
+        "two":"Business",
+        "three":"Government"
+      },
+      "second":{
+        "one":"Free",
+        "two":"",
+        "three":"Coverage"
+      },
+      "third":{
+        "one":"Perfect for individuals (personal use, plot/land allocation and records)",
+        "two":"Perfect for businesses (e-commerce,delivery, door-to-door marketing)",
+        "three":"Perfect for government entities (polling,census, security, data collection"
+      }
+    },
+    "body":{
+
+    },
+    "footer":{
+      "one":"TRY NOW",
+      "two":"CONTACT US",
+      "three":"CONTACT US"
+    }
   },
   "footer": {
     "col_1": {

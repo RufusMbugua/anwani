@@ -661,7 +661,7 @@ blockquote.pull-right {
 }
 
 blockquote.orange {
-    border-color: #FF6E40;
+    border-color: #3dbed4;
 }
 
 blockquote.background {
@@ -738,7 +738,7 @@ a:focus {
 }
 
 .text-orange {
-    color: #FF6E40;
+    color: #3dbed4;
 }
 
 .text-light {
@@ -805,7 +805,7 @@ a:focus {
 }
 
 .bg-orange {
-    background: #FF6E40;
+    background: #3dbed4;
     padding: 3px 8px;
     color: #ffffff;
 }
@@ -859,7 +859,7 @@ a:focus {
 
 .page-topbar .logo-area {
     width: 200px;
-    background-color: #FF6E40;
+    background-color: #eee;
     display: block;
     min-height: 60px;
     float: left;
@@ -959,7 +959,7 @@ a:focus {
 }
 
 .page-topbar .quick-area .slantit .info-menu {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     padding: 0 0px 0 0px;
 }
 
@@ -995,7 +995,7 @@ a:focus {
     content: " ";
     width: 40px;
     height: 60px;
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     position: absolute;
     left: -18px;
     -moz-transform: skewX(30deg);
@@ -1013,7 +1013,7 @@ a:focus {
 
 .page-topbar.chat_shift .quick-area .info-menu li.chat-slant,
 .page-topbar.chat_shift .chat-slant:before {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     padding: 0px;
 }
 
@@ -1045,7 +1045,7 @@ a:focus {
     position: absolute;
     width: 60px;
     height: 3px;
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     content: " ";
     bottom: 0px;
     left: 58px;
@@ -1066,7 +1066,7 @@ a:focus {
     position: absolute;
     width: 60px;
     height: 3px;
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     content: " ";
     top: 15px;
     left: 55px;
@@ -1084,7 +1084,7 @@ a:focus {
 .page-topbar .quick-area .pagetitle h1 {
     font-weight: 600;
     color: #455A64;
-    padding: 25px 45px 0 55px;
+    padding: 20px 45px 0 55px;
     font-size: 32px;
     line-height: 35px;
     text-transform: uppercase;
@@ -1311,7 +1311,7 @@ a:focus {
 }
 
 .page-topbar li .notifications .idle .notice-icon i {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
 }
 
 .page-topbar li .notifications .offline .notice-icon i {
@@ -1500,7 +1500,7 @@ a:focus {
 }
 
 .page-topbar li.searchform .form-control:focus {
-    border-bottom: 2px solid #FF6E40;
+    border-bottom: 2px solid #3dbed4;
 }
 
 .page-topbar li.searchform input[type="submit"] {
@@ -1509,7 +1509,7 @@ a:focus {
 
 .page-topbar li.searchform.focus i,
 .page-topbar li.searchform .material-icons.primary {
-    color: #FF6E40;
+    color: #3dbed4;
 }
 
 @media (min-width: 992px) and (max-width: 1270px) {
@@ -1809,12 +1809,17 @@ a:focus {
 .profile-info.ng-hide-add {
     display: none !important;
 }
+.profile-info:hover{
+    cursor:hand;
+}
 
 .page-sidebar .profile-info {
     background: transparent;
     padding-top: 30px;
     display: inline-block;
     vertical-align: top;
+    cursor: pointer;
+    width:100%;
 }
 
 .page-sidebar .profile-image,
@@ -1901,7 +1906,7 @@ a:focus {
 
 .profile-status.idle,
 .uprofile-status.idle {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
 }
 
 .profile-status.away,
@@ -2230,7 +2235,7 @@ section.orange header.panel_header .title:after,
 section.orange .content-body,
 section.orange .panel_header .actions,
 section.orange .panel_header .actions:before {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     color: #f5f5f5;
 }
 
@@ -2541,13 +2546,13 @@ fieldset[disabled] .form-control {
 
 .input-group.orange .input-group-addon,
 .input-group.orange .input-group-btn button {
-    border-color: #FF6E40;
+    border-color: #3dbed4;
     background-color: transparent;
-    color: #FF6E40;
+    color: #3dbed4;
 }
 
 .input-group.orange .form-control {
-    border-color: #FF6E40;
+    border-color: #3dbed4;
 }
 
 .input-group-btn .btn {
@@ -2806,8 +2811,8 @@ slider span.pointer.active:after {
 }
 
 .btn.btn-border.btn-orange {
-    border: 1px solid #FF6E40;
-    color: #FF6E40;
+    border: 1px solid #3dbed4;
+    color: #3dbed4;
     background: transparent;
 }
 
@@ -2871,7 +2876,7 @@ slider span.pointer.active:after {
 }
 
 .btn.btn-orange {
-    background: #FF6E40;
+    background: #3dbed4;
     color: #ffffff;
 }
 
@@ -3317,12 +3322,12 @@ fieldset[disabled] .btn {
 }
 
 .alert-orange {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     color: #ffffff;
 }
 
 .alert-orange.minimal {
-    border-left: 5px solid #FF6E40;
+    border-left: 5px solid #3dbed4;
 }
 
 .notification_btns .btn {
@@ -3643,7 +3648,7 @@ fieldset[disabled] .btn {
 }
 
 .progress.orange .progress-bar {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
 }
 
 .progress.secondary .progress-bar {
@@ -3990,23 +3995,23 @@ fieldset[disabled] .btn {
 }
 
 .tooltip.orange .tooltip-inner {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
 }
 
 .tooltip.orange.top .tooltip-arrow {
-    border-top-color: #FF6E40;
+    border-top-color: #3dbed4;
 }
 
 .tooltip.orange.left .tooltip-arrow {
-    border-left-color: #FF6E40;
+    border-left-color: #3dbed4;
 }
 
 .tooltip.orange.right .tooltip-arrow {
-    border-right-color: #FF6E40;
+    border-right-color: #3dbed4;
 }
 
 .tooltip.orange.bottom .tooltip-arrow {
-    border-bottom-color: #FF6E40;
+    border-bottom-color: #3dbed4;
 }
 
 .tooltip.primary .tooltip-inner {
@@ -4124,7 +4129,7 @@ fieldset[disabled] .btn {
 }
 
 .popover.orange .popover-title {
-    background: #FF6E40;
+    background: #3dbed4;
 }
 
 .popover.primary .popover-title {
@@ -4774,7 +4779,7 @@ fieldset[disabled] .btn {
     -moz-border-radius: 0px 0 0 0;
     border-radius: 0px 0 0 0;
     -webkit-border-radius: 0px 0 0 0;
-    background-color: #FF6E40;
+    background-color: #3dbed4;
 }
 
 .fc-row table td {
@@ -4863,7 +4868,7 @@ fieldset[disabled] .btn {
     position: absolute;
     content: " ";
     width: 1px;
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.0), 0 2px 2px rgba(0, 0, 0, 0.1);
     -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.0), 0 2px 2px rgba(0, 0, 0, 0.1);
     -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.0), 0 2px 2px rgba(0, 0, 0, 0.1);
@@ -4983,7 +4988,7 @@ fieldset[disabled] .btn {
     top: 20px;
     left: 50%;
     margin-left: -25px;
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     z-index: 10;
     border: 3px solid #FFFFFF;
 }
@@ -5367,6 +5372,7 @@ fieldset[disabled] .btn {
 .table>tfoot>tr>td {
     border-color: #E0E0E0;
     padding: 12px 15px 11px 15px;
+    cursor:pointer;
 }
 
 .table>thead>tr>th,
@@ -5610,11 +5616,11 @@ table.dataTable.no-footer {
 }
 
 .icon-orange {
-    color: #FF6E40;
+    color: #f6b002;
 }
 
-.icon-primary {
-    color: #673AB7;
+.icon-primary,.digit {
+    color: #3dbed4;
 }
 
 .icon-success {
@@ -5644,7 +5650,7 @@ table.dataTable.no-footer {
 .icon-orange.icon-rounded,
 .icon-orange.icon-cornered,
 .icon-orange.icon-square {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     color: #ffffff;
 }
 
@@ -5698,9 +5704,9 @@ table.dataTable.no-footer {
 }
 
 .icon-orange.icon-bordered {
-    border: 1px solid #FF6E40;
+    border: 1px solid #3dbed4;
     background-color: transparent;
-    color: #FF6E40;
+    color: #3dbed4;
 }
 
 .icon-primary.icon-bordered {
@@ -5860,19 +5866,22 @@ table.dataTable.no-footer {
     Login and Registration Page - Transparent Background Style
 ------------------------------------------------------------------*/
 
-.loginpage {
+.loginpage{
     padding: 70px 50px 80px 50px;
     background-color: rgba(0, 0, 0, 0.5);
     margin-top: 5%;
 }
+.loginpage form{
+    padding:0;
+}
 
 @media (min-width: 992px) and (max-width: 1199px) {
-    .loginpage {
+      {
         padding: 0 90px;
     }
 }
 
-.loginpage h1 a {
+form h1 a {
     height: 92px;
     margin: 0px auto 0px auto;
     padding: 0;
@@ -5884,7 +5893,7 @@ table.dataTable.no-footer {
     display: block;
 }
 
-.loginpage form {
+form {
     margin-top: 30px;
     margin-bottom: 15px;
     margin-left: 0;
@@ -5898,7 +5907,7 @@ table.dataTable.no-footer {
     background-color: transparent;
 }
 
-.loginpage form .forgetmenot {
+form .forgetmenot {
     width: 100%;
     display: block;
     margin: 12px 0 11px 0!important;
@@ -5907,13 +5916,13 @@ table.dataTable.no-footer {
     margin-bottom: 0px;
 }
 
-.loginpage form p.submit {
+ form p.submit {
     display: inline-block;
     width: 100%;
     margin-top: 15px;
 }
 
-.loginpage label {
+ label {
     font-size: 14px;
     line-height: 23px;
     width: 100%;
@@ -5921,9 +5930,9 @@ table.dataTable.no-footer {
     font-weight: 500;
 }
 
-.loginpage form .input,
-.loginpage form input[type=checkbox],
-.loginpage input[type=text] {
+ form .input,
+ form input[type=checkbox],
+ input[type=text] {
     -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
     -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
@@ -5932,9 +5941,15 @@ table.dataTable.no-footer {
     /* text-shadow: 1px 1px 1px rgba(200,200,200,.1); */
     font-weight: 500;
 }
-
-.loginpage form .input,
-.loginpage input[type=text] {
+form.black input,
+form.black input:hover,
+form.black input:active {
+    border-color:#37474F;
+    box-shadow: none;
+    color:#37474F;
+}
+ form .input,
+ input[type=text] {
     font-size: 19px;
     width: 100%;
     padding: 9px;
@@ -5944,60 +5959,60 @@ table.dataTable.no-footer {
     border-bottom: 2px solid rgba(255, 255, 255, 0.7);
 }
 
-.loginpage form .input,
-.loginpage form input[type=checkbox],
-.loginpage input[type=text] {
+ form .input,
+ form input[type=checkbox],
+ input[type=text] {
     color: #ffffff;
     background: transparent;
     font-weight: 500;
 }
 
-.loginpage #nav a,
-.loginpage a {
+ #nav a,
+ a {
     color: rgba(255, 255, 255, 0.8);
     font-size: 16px;
 }
 
-.loginpage #nav a:hover,
-.loginpage a:hover,
-.loginpage #nav a:active,
-.loginpage a:active {
+ #nav a:hover,
+ a:hover,
+ #nav a:active,
+ a:active {
     color: rgba(255, 255, 255, 1);
 }
 
-.loginpage,
-.loginpage form label,
-.loginpage form,
-.loginpage .message {
+ ,
+  form label,
+  form,
+  .message {
     color: rgba(255, 255, 255, 1);
 }
 
-.loginpage form .input,
-.loginpage form input[type=checkbox],
-.loginpage input[type=text] {
+  form .input,
+  form input[type=checkbox],
+  input[type=text] {
     background-color: transparent;
     outline: none;
     padding-left: 0px;
 }
 
-.loginpage form .input:hover,
-.loginpage form input[type=checkbox]:hover,
-.loginpage input[type=text]:hover,
-.loginpage form .input:focus,
-.loginpage form input[type=checkbox]:focus,
-.loginpage input[type=text]:focus {
+  form .input:hover,
+  form input[type=checkbox]:hover,
+  input[type=text]:hover,
+  form .input:focus,
+  form input[type=checkbox]:focus,
+  input[type=text]:focus {
     background-color: transparent;
     outline: none;
     border-bottom: 2px solid rgba(255, 255, 255, 1);
 }
 
-.loginpage #login_error,
-.loginpage .message {}
+  #login_error,
+  .message {}
 
-.loginpage .message,
-.loginpage .message a,
-.loginpage #login_error,
-.loginpage #login_error a {
+  .message,
+  .message a,
+  #login_error,
+  #login_error a {
     margin-bottom: 20px;
     background-color: transparent;
     color: #cccccc;
@@ -6012,8 +6027,7 @@ table.dataTable.no-footer {
 }
 
 body .login_page {
-    background-color: #673AB7;
-    background-image: url('../images/bg3.png');
+    background-image: url('../images/city_banner.png');
     background-attachment: fixed;
     background-size: cover;
     height: 100%;
@@ -6377,7 +6391,7 @@ code {
 }
 
 .label-orange {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
 }
 
 .label-info {
@@ -6475,7 +6489,7 @@ code {
 }
 
 .badge-orange {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     color: #ffffff;
 }
 
@@ -6728,11 +6742,11 @@ code {
 /*collapsed menu and chat open states*/
 
 .page-topbar.sidebar_shift .logo-area {
-    background-color: #FF6E40;
+    background-color: #eeeeee;
 }
 
 .page-topbar.chat_shift .logo-area {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
 }
 
 .chatapi-windows.hideit {
@@ -6836,7 +6850,7 @@ code {
 .page-sidebar.chat_shift #main-menu-wrapper .wraplist .sub-menu li.active .sub-menu .active a,
 .page-sidebar.collapseit #main-menu-wrapper .wraplist .sub-menu li.active .sub-menu .active a {
     background-color: #161e22;
-    border-left: 3px solid #FF6E40;
+    border-left: 3px solid #3dbed4;
 }
 
 .page-sidebar.chat_shift #main-menu-wrapper .wraplist .sub-menu li.active .sub-menu a,
@@ -7135,7 +7149,7 @@ border-left: 3px solid transparent;
     font-size: 18px;
     margin: 0px 0 0px 0;
     color: #ffffff;
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     height: 60px;
     line-height: 60px;
 }
@@ -7220,7 +7234,7 @@ border-left: 3px solid transparent;
 .page-chatapi .group-list .group-status.away i,
 .chatapi-windows .user-window .controlbar .status.away i,
 .page-chatapi .contact-list .user-status.away i {
-    color: #FF6E40;
+    color: #3dbed4;
 }
 
 .page-chatapi .contact-list .user-info {
@@ -7572,7 +7586,7 @@ border-left: 3px solid transparent;
 }
 
 .chatmsg .name .status.away {
-    color: #FF6E40;
+    color: #3dbed4;
 }
 
 .chatmsg .name .status.offline {
@@ -7598,7 +7612,7 @@ border-left: 3px solid transparent;
 }
 
 .typearea i.primary {
-    color: #FF6E40;
+    color: #3dbed4;
 }
 
 .typearea input {
@@ -7616,7 +7630,7 @@ border-left: 3px solid transparent;
     color: #B0BEC5;
     background-color: transparent;
     ;
-    border-bottom: 2px solid #FF6E40;
+    border-bottom: 2px solid #3dbed4;
 }
 
 
@@ -7697,7 +7711,7 @@ border-left: 3px solid transparent;
 
 .mail_tabs li.active a,
 .mail_tabs li a:hover {
-    background-color: #FF6E40;
+    background-color: #3dbed4;
     color: #ffffff;
 }
 
@@ -8003,7 +8017,7 @@ border-left: 3px solid transparent;
 }
 
 .r1_graph4 {
-    background: #FF6E40;
+    background: #3dbed4;
     color: #ffffff;
 }
 
@@ -8371,7 +8385,7 @@ border-left: 3px solid transparent;
     position: absolute;
     height: 100%;
     width: 100%;
-    background-image: url("../images/bg3.png");
+    background-image: url("../images/city_banner.png");
     background-size: cover;
 }
 
@@ -8955,7 +8969,7 @@ border-left: 3px solid transparent;
 }
 
 .tile-progress.inverted.text-orange .progress .progress-bar {
-    background: #FF6E40;
+    background: #3dbed4;
 }
 
 .tile-progress.inverted.text-secondary .progress .progress-bar {
@@ -9390,21 +9404,27 @@ border-left: 3px solid transparent;
     Logo
 ----------------------------------------------------------*/
 
-.page-topbar .logo-area {
-    background-image: url('../images/anwani_logo.png');
-    background-repeat: no-repeat;
+.page-topbar .logo-area img {
+padding:20px 0 0 30px;
+    width:150px;
+
 }
 
 .page-topbar.sidebar_shift .logo-area {
-    background-image: url('../images/logo-folded.png');
-    background-repeat: no-repeat;
-    background-position: right top;
+    display:none;
+}
+.page-topbar.sidebar_shift .logo-area-small {
+    padding:5px;
+    width:60px;
+    background:##37474F;
+    display: block !important;
+    float: left;
+    height: 60px;
 }
 
 .page-topbar.chat_shift .logo-area {
-    background-image: url('../images/logo-folded.png');
-    background-repeat: no-repeat;
-    background-position: right top;
+    padding:10px 0 0 20px;
+    width:50px;
 }
 
 
@@ -9467,7 +9487,7 @@ border-left: 3px solid transparent;
 
 .uprofile-info {
     padding: 25px 40px 15px 40px;
-    background: #FF6E40;
+    background: #3dbed4;
     margin-bottom: 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.0), 0 2px 2px rgba(0, 0, 0, 0.1);
     -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.0), 0 2px 2px rgba(0, 0, 0, 0.1);
@@ -10441,7 +10461,7 @@ border-left: 3px solid transparent;
 .bg-warning{ background: #fdb45d; padding: 3px 8px; color: #ffffff;}
 .bg-danger{ background: rgba(240,80,80,1.0); padding: 3px 8px; color: #ffffff;} #f05050
 .bg-success{ background: rgba(102,189,120,1.0); padding: 3px 8px; color: #ffffff;} #66bd78
-.bg-orange{ background: #FF6E40; padding: 3px 8px; color: #ffffff;} #FF6E40
+.bg-orange{ background: #3dbed4; padding: 3px 8px; color: #ffffff;} #3dbed4
 .bg-secondary{ background: rgba(169,169,169,1.0); padding: 3px 8px; color: #616161;} #a9a9a9
 
 #fdb45d - #fdb45d
@@ -10965,15 +10985,15 @@ fieldset[disabled] .icheck input + i:before {
 }
 
 .icheck.icheck-orange input:checked + i {
-    border-color: #FF6E40;
+    border-color: #3dbed4;
 }
 
 .icheck.icheck-orange input:checked + i:before {
-    color: #FF6E40;
+    color: #3dbed4;
 }
 
 .icheck.icheck-orange > i {
-    border: 1px solid #FF6E40;
+    border: 1px solid #3dbed4;
 }
 
 .icheck.icheck-success input:checked + i {
@@ -11318,4 +11338,16 @@ fieldset[disabled] .icheck input + i:before {
 .chosen-container-multi .chosen-choices .search-choice .search-choice-close {
     top: 8px !important;
     right: 6px !important;
+}
+
+.angular-google-map-container { height: 400px; }
+
+
+/* Custom Designs */
+.wid-stats{
+    cursor:pointer;
+}
+.wid-stats:hover,.wid-stats:hover ::before .wid-stats:hover .stats-data i{
+    cursor:hand;
+    -webkit-box-shadow: 0 1px 3px #3dbed4, 0 2px 2px #3dbed4;
 }

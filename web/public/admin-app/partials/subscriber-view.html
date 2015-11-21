@@ -1,0 +1,54 @@
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'View Subscriber'; ">
+    <section class="box nobox margin-top-15 margin-bottom-0">
+        <div class="content-body">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-30 padding-left-20">
+                <table ng-if="_admin" class="table table-striped" st-table="displayedCollection" st-safe-src="subscribers">
+                    <thead>
+                    <tr style="background:transparent">
+                        <th colspan="2">
+                            <span class="digit" ng-bind="subscribers.length"></span>  Records
+                        </th>
+                        <th colspan="2" class="search">
+                            <input placeholder="Search for Address..." st-search="" type="search" class="form-control">
+                        </th>
+                    </tr>
+                    <tr>
+
+                        <th st-sort="name">Name</th>
+                        <th st-sort="email">Email</th>
+                        <th st-sort="role">Role</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="subscriber in displayedCollection">
+                        <td ng-bind="subscriber.name"></td>
+                        <td ng-bind="subscriber.email"></td>
+                        <td ng-bind="subscriber.role"></td>
+                        <td>
+                            <button class="btn btn-xs btn-danger" ng-click="edit()"><i class="typcn typcn-edit"></i>Edit</button>
+                            <button class="btn btn-xs btn-primary" ng-click="view(subscriber)"><i class="typcn typcn-eye"></i>View</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th st-sort="name">Name</th>
+                        <th st-sort="email">Email</th>
+                        <th st-sort="role">Role</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-center navs">
+                            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+                <h3 style="text-align: center" ng-if="!_admin">
+                    You are not autorized to view this information.
+                </h3>
+            </div>
+        </div>
+    </section>
+</div>

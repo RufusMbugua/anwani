@@ -1,7 +1,9 @@
-
+/.idea/*
 /node_modules
 .env
 /bower_components
 Envoy.blade.php
 /vendor
 /.sass-cache
+Procfile
+web/bower_components

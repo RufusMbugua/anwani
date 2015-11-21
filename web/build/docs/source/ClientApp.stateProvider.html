@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+  <head>
+    <base href="../" />
+    <title>JSDoc: Source:routes.js</title>
+    <link type="text/css" rel="stylesheet" href="css/jsdoc-default.css" />
+    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet" />
+    <script src="js/prettify.js"></script>
+  </head>
+  <body>
+    <nav>
+      <h2><a href="index.html">Index</a></h2>
+          <h3>module: AdminApp</h3>
+        <ul>
+            <h4>controller</h4>
+            <ul>
+                <li><a href="AdminApp.AddressesCtrl.html">AdminApp.AddressesCtrl</a></li>
+                <li><a href="AdminApp.LoginCtrl.html">AdminApp.LoginCtrl</a></li>
+                <li><a href="AdminApp.UsersCtrl.html">AdminApp.UsersCtrl</a></li>
+            </ul>
+            <h4>runtime</h4>
+            <ul>
+                <li><a href="AdminApp.AddressesCtrlRuntime.html">AdminApp.AddressesCtrlRuntime</a></li>
+                <li><a href="AdminApp.UsersCtrlRuntime.html">AdminApp.UsersCtrlRuntime</a></li>
+            </ul>
+        </ul>
+        <ul>
+            <h4>app AdminApp</h4>
+            <ul>
+                <li><a href="AnwaniAdmin.html">AnwaniAdmin</a></li>
+            </ul>
+        </ul>
+          <h3>module: ClientApp</h3>
+        <ul>
+            <h4>config $stateProvider</h4>
+            <ul>
+                <li><a href="ClientApp.stateProvider.html">ClientApp.stateProvider</a></li>
+            </ul>
+        </ul>
+    </nav>
+    <h1 class="title">
+      Source:routes.js
+    </h1>
+    <div id="main">
+      <article>
+        <pre class="prettyprint source linenums"><code>/**
+ * @ngdoc config $stateProvider
+ * @memberof ClientApp
+ * @name stateProvider
+ * @param $stateProvider
+ * @param $urlRouterProvider
+ * @param JQ_CONFIG
+ */
+app.config(['$stateProvider', '$urlRouterProvider', 'JQ_CONFIG',
+    function($stateProvider, $urlRouterProvider, JQ_CONFIG) {
+        // For any unmatched url, redirect to /state1
+        /**
+         * @memberof stateProvider
+         * @name urlRouterProvider
+         * @param  /login {string} default route
+         * @return {[type]}
+         */
+        $urlRouterProvider.otherwise("/login");
+        // Now set up the states
+        /**
+         * [state description]
+         * @param  {[type]} 'test'       [description]
+         * @param  {[type]} {                                                            url: '/test' [description]
+         * @param  {[type]} views:       {                                                                          '':           {        controller: 'publicCtrl' [description]
+         * @param  {[type]} templateUrl: 'app/partials/public/index.html' [description]
+         * @param  {[type]} }                                                            }            }             [description]
+         * @return {[type]}              [description]
+         */
+        $stateProvider.state('app', {
+            templateUrl: '../admin-app/partials/app.html'
+        })
+            .state('app.dashboard', {
+                url: '/dashboard',
+                views:{
+                    '':{
+                        templateUrl: '../admin-app/partials/app_dashboard.html'
+                    },
+                    'address-search@app.dashboard':{
+                        controller:'AddressesCtrl',
+                        templateUrl: '../admin-app/partials/addresses/card.html'
+                    }
+                },
+                //resolve: {
+                //  deps: ['$ocLazyLoad',
+                //    function($ocLazyLoad) {
+                //      return $ocLazyLoad.load('chart.js').then(
+                //        function() {
+                //          return $ocLazyLoad.load(
+                //            'js/controllers/dashboard.js');
+                //        }
+                //      );
+                //    }
+                //  ]
+                //}
+                data: {
+                    permissions: {
+                        only: ['admin', 'subscriber'],
+                        redirectTo:'login'
+                    }
+                }
+            })
+            .state('app.profile', {
+                url: '/profile',
+                templateUrl: '../admin-app/partials/ui-profile.html'
+            })
+            .state('welcome', {
+                url: '/welcome',
+                templateUrl: '../admin-app/partials/welcome.html'
+            })
+            .state('login', {
+                url: '/login',
+                templateUrl: '../admin-app/partials/ui-login.html'
+            })
+            .state('access',{
+            })
+            .state('not-authorized',{
+                url:'/not-authorized',
+                templateUrl:'../admin-app/partials/ui-not-authorized.html'
+            })
+            .state('register', {
+                url: '/register',
+                templateUrl: '../admin-app/partials/ui-register.html'
+            })
+            .state('forgot', {
+                url: '/forgot',
+                templateUrl: '../admin-app/partials/ui-forgotpwd.html'
+            })
+            .state('app.address', {
+                url:'/address',
+                controller:'AddressesCtrl',
+                templateUrl:'../admin-app/partials/address.html',
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo:'not-authorized'
+                    }
+                }
+            })
+            .state('app.address.new', {
+                url: '/new',
+                templateUrl: '../admin-app/partials/address-add.html'
+            })
+            .state('app.address.view', {
+                url: '/view',
+                templateUrl: '../admin-app/partials/address-view.html'
+            })
+            .state('app.address.one', {
+                url: '/one',
+                views:{
+                    '':{
+                        templateUrl: '../admin-app/partials/address-view-one.html'
+                    },
+                    'map@app.address.one':{
+                        controller:'MapsCtrl',
+                        templateUrl: '../admin-app/partials/ui-map.html'
+                    }
+                }
+            })
+            .state('app.subscriber', {
+                url:'/subscriber',
+                controller:'SubscribersCtrl',
+                templateUrl:'../admin-app/partials/subscriber.html',
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo:'not-authorized'
+                    }
+                }
+            })
+            .state('app.subscriber.new', {
+                url: '/new',
+                templateUrl: '../admin-app/partials/subscriber-add.html'
+            })
+            .state('app.subscriber.view', {
+                url: '/view',
+                templateUrl: '../admin-app/partials/subscriber-view.html'
+            })
+            .state('app.subscriber.one', {
+                url: '/one',
+                views:{
+                    '':{
+                        templateUrl: '../admin-app/partials/subscriber-view-one.html'
+                    }
+                }
+            })
+            .state('app.users', {
+                url: '/users',
+                controller:'UsersCtrl',
+                templateUrl: '../admin-app/partials/users.html',
+                data: {
+                    permissions: {
+                        only: ['admin','subscriber'],
+                        redirectTo:'not-authorized'
+                    }
+                }
+            })
+            .state('app.users.new', {
+                url: '/add',
+                templateUrl: '../admin-app/partials/users-add.html'
+            })
+            .state('app.users.view', {
+                url: '/view',
+                templateUrl: '../admin-app/partials/users-view.html'
+            })
+            .state('app.users.one', {
+                url: '/one',
+                templateUrl: '../admin-app/partials/users-view-one.html'
+            })
+            .state('app.map', {
+                url: '/map',
+                controller:"MapsCtrl",
+                templateUrl: '../admin-app/partials/ui-map.html'
+            })
+        ;
+    }
+]);
+</code></pre>
+      </article>
+    </div>
+    <footer style="clear:both">
+      Documentation generated by
+      <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
+      using 
+      <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a> 
+    </footer>
+    <!--%= prettyJson %-->
+    <script>
+      prettyPrint();
+      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
+      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
+    </script>
+  </body>
+</html>

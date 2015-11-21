@@ -1,0 +1,41 @@
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'New User'; ">
+    <section class="box nobox margin-top-15 margin-bottom-0">
+        <div class="content-body">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-30 padding-left-20">
+                <form  action="" class="black form-validation">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="input" ng-model="chosenUser.first_name" type="text" placeholder="First Name">
+                        </div>
+                        <div class="col-md-6">
+                            <input  class="input" ng-model="chosenUser.last_name" type="text" placeholder="Last Name">
+                        </div>
+                        <div class="col-md-6">
+                            <input  class="input" ng-model="chosenUser.other_name" type="text" placeholder="Other Name">
+                        </div>
+                        <div class="col-md-6">
+                            <input  class="input" ng-model="chosenUser.phone_number" type="text" placeholder="Phone Number">
+                        </div>
+                        <div class="col-md-6">
+                            <input  class="input" ng-model="chosenUser.password" type="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input  class="input" ng-model="chosenUser.security_pass.question" type="text" placeholder="Security Question">
+                        </div>
+                        <div class="col-md-6">
+                            <input  class="input" ng-model="chosenUser.security_pass.answer" type="text" placeholder="Security Answer">
+                        </div>
+                    </div>
+
+                    <p class="submit">
+                        <button class="btn btn-info btn-block" ui-sref="app.users.view">
+                            Back to Users
+                        </button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,55 @@
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'View Users'; ">
+    <section class="box nobox margin-top-15 margin-bottom-0">
+        <div class="content-body">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-30 padding-left-20">
+                <table class="table table-striped" st-table="displayedCollection" st-safe-src="users">
+                    <thead>
+                    <tr style="background:transparent">
+                        <th colspan="4">
+                            <span class="digit" ng-bind="users.length"></span>  Records
+                        </th>
+                        <th colspan="2" class="search">
+                            <input placeholder="Search for User..." st-search="" type="search" class="form-control">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th st-sort="masked_code">Location Code</th>
+                        <th st-sort="first_name">First Name</th>
+                        <th st-sort="last_name">Last Name</th>
+                        <th st-sort="city">City</th>
+                        <th st-sort="country">Country</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in displayedCollection">
+                        <td ng-bind="user.masked_code"></td>
+                        <td ng-bind="user.first_name"></td>
+                        <td ng-bind="user.last_name"></td>
+                        <td ng-bind="user.city"></td>
+                        <td ng-bind="user.country"></td>
+                        <td>
+                            <button class="btn btn-xs btn-primary" ng-click="view(user)"><i class="typcn typcn-eye"></i>View</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th st-sort="masked_code">Location Code</th>
+                        <th st-sort="first_name">First Name</th>
+                        <th st-sort="last_name">Last Name</th>
+                        <th st-sort="city">City</th>
+                        <th st-sort="country">Country</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="text-center navs">
+                            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

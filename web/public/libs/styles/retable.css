@@ -1,0 +1,51 @@
+/*!
+ * retable 0.0.3
+ * Transform table for mobile
+ * https://github.com/TrySound/retable
+ * 
+ * Released under the MIT license
+ * Copyright (c) 2015, Bogdan Chadkin <trysound@yandex.ru>
+ */
+
+.retable,
+.retable-table {
+	width: 100%;
+}
+
+.retable-caption {
+	text-align: center;
+}
+
+.retable-sm,
+.retable-md,
+.retable-lg {
+	display: none;
+}
+
+@media (min-width: 768px) {
+	.retable-sm + .retable-container {
+		display: none;
+	}
+	.retable-sm {
+		display: table;
+	}
+}
+
+@media (min-width: 992px) {
+	.retable-md + .retable-container {
+		display: none;
+	}
+	.retable-md {
+		display: table;
+	}
+}
+
+
+@media (min-width: 1200px) {
+	.retable-lg + .retable-container {
+		display: none;
+	}
+	.retable-lg {
+		display: table;
+	}
+}

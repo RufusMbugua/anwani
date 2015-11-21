@@ -35,35 +35,44 @@ app.config(function($stateProvider, $urlRouterProvider) {
           templateUrl: 'app/partials/home/index.html',
         },
         'about@home': {
-          controller: '',
           templateUrl: 'app/partials/home/about.html',
         },
         'header@home': {
-          controller: '',
           templateUrl: 'app/partials/home/header.html',
         },
         'features@home': {
-          controller: '',
           templateUrl: 'app/partials/home/features.html',
         },
         'footer@home': {
-          controller: '',
           templateUrl: 'app/partials/home/footer.html',
         },
         'banner@home': {
-          controller: '',
           templateUrl: 'app/partials/home/banner.html',
         },
         'sub-header@home': {
-          controller: '',
           templateUrl: 'app/partials/home/sub-header.html',
         },
         'partners@home': {
-          controller: '',
           templateUrl: 'app/partials/home/partners.html',
         }
       }
     })
+
+      .state('pricing',{
+        url:'/pricing',
+        views:{
+          '':{
+            controller:'homeCtrl',
+            templateUrl:'app/partials/home/pricing.html'
+          },
+          'header@pricing': {
+            templateUrl: 'app/partials/home/header-clean.html',
+          },
+          'footer@pricing': {
+            templateUrl: 'app/partials/home/footer.html',
+          },
+        }
+      })
     .state('login', {
       url: '/login',
       views: {

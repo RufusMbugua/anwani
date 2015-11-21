@@ -1,0 +1,63 @@
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'View One Subscriber'; ">
+    <section class="box nobox margin-top-15 margin-bottom-0">
+        <div class="content-body">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-30 padding-left-20">
+                <form name="form" class="black">
+                    <div class="text-danger wrapper text-center" ng-show="authError">
+                        {{authError}}
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <label for="">Name</label>
+                            <input type="text" class="input" ng-model="chosenSubscriber.name"
+                                   placeholder="Name"
+                                    />
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <label for="">Address</label>
+                            <input type="text" class="input" ng-model="chosenSubscriber.address" placeholder="Address"
+                                    />
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <label for="">Phone Number</label>
+                            <input type="text" class="input" ng-model="chosenSubscriber.phone_number" placeholder="Phone Number"
+                                    />
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <label for="">Email</label>
+                            <input type="text" class="input" ng-model="chosenSubscriber.email" placeholder="Email"
+                                    />
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <label for="">Logo</label>
+                            <input type="file" name="name" class="input" ng-model="chosenSubscriber.logo"
+                                   placeholder="Logo"
+                                    />
+                        </p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p>
+                            <label for="">Website</label>
+                            <input type="text" class="input" ng-model="chosenSubscriber.website" placeholder="Website"
+                                    />
+                        </p>
+                    </div>
+                    <p class="submit">
+                        <button class="btn btn-info btn-block" ui-sref="app.subscriber.view">
+                            Back to Subscribers
+                        </button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
