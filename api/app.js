@@ -17,6 +17,7 @@ var authorize       = require('./lib/authorize');
 var multipart       = require('./lib/multipart');
 var storeMediaFiles = require('./lib/store-media');
 var routes          = require('./routes');
+var serveDocs       = require('./controllers/serve-docs');
 
 var app = express();
 var server;
@@ -27,6 +28,7 @@ mongoose.connection.on('error', utils.mongoError);
 
 // Service Settings
 app.disable('x-powered-by');
+app.disable('etag');
 app.set('port', config.PORT);
 
 // PRODUCTION Environment settings
@@ -38,7 +40,7 @@ if(config.NODE_ENV === 'production'){
 
 // Documentation resource
 
-app.use('/documentation', express.static(path.join(__dirname, 'documentation')));
+app.use('/documentation', serveDocs);
 app.use('/media', express.static(path.join(__dirname, 'media')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
@@ -47,7 +49,7 @@ app.use(cors({
   methods: 'GET,POST,PUT,DELETE,OPTIONS',
   allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization'
 }));
-app.use(authorize().unless( { path: config.OPEN_ENDPOINTS } ));
+app.use(authorize().unless( { path: routes.OPEN_ROUTES } ));
 app.use(bodyParser.urlencoded({
   extended: true
 }));

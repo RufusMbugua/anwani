@@ -245,12 +245,7 @@ exports.fetchAll = function fetchAllUsers(req, res, next) {
 exports.fetchUserAddresses = function fetchAllUserAddresses(req, res, next) {
   debug('get a collection of user addresses');
 
-  var query = {
-    user:     req.params.id,
-    archived: false
-  };
-
-  AddressModel.find(query, qs, function cb(err, addresses) {
+  Address.getUsersCollection(req.params.id, 'service', function (err, addresses) {
     if(err) {
       return next(CustomError({
         name: 'SERVER_ERROR',
@@ -262,6 +257,32 @@ exports.fetchUserAddresses = function fetchAllUserAddresses(req, res, next) {
     res.json(addresses);
   });
 };
+
+/**
+ * Get a collection of user's addresses for Mobile
+ *
+ * @desc Fetch a collection of user's addresses
+ *
+ * @param {Object} req HTTP Request Object
+ * @param {Object} res HTTP Response Object
+ * @param {Function} next Middleware dispatcher
+ */
+exports.fetchUserAddressesMobile = function fetchAllUserAddressesMobile(req, res, next) {
+  debug('get a collection of user addresses - mobile');
+
+  Address.getUsersCollection(req.params.id, 'mobile', function (err, addresses) {
+    if(err) {
+      return next(CustomError({
+        name: 'SERVER_ERROR',
+        message: err.message,
+        status: 500
+      }));
+    }
+
+    res.json(addresses);
+  });
+};
+
 
 /**
  * Update the password of a user

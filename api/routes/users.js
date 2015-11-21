@@ -283,6 +283,41 @@ router.delete('/:id', accessControl(['consumer', 'admin']), userController.delet
 router.get('/:id/addresses', accessControl(['consumer', 'admin']), userController.fetchUserAddresses);
 
 /**
+ * @api {get} /users/:id/addresses/mobile Get user's address collection(Mobile)
+ * @apiVersion 1.0.0
+ * @apiName FetchUserAddressesMobile
+ * @apiGroup User
+ *
+ * @apiDescription Get a collection of user's addresses. For mobile devices
+ *
+ * @apiSuccess {String} _id address id
+ * @apiSuccess {String} virtual_code virtual code
+ * @apiSuccess {String} location_pic location photo
+ * @apiSuccess {Number} latitude latitude coordinate
+ * @apiSuccess {Number} longitude longitude coordinate
+ * @apiSuccess {String} street_address street address
+ * @apiSuccess {String} city city name
+ * @apiSuccess {String} country country name
+ *
+ * @apiSuccessExample Response Example:
+ *  [{
+ *    "_id" : "556e1174a8952c9521286a60",
+ *    user: "556e1174a8952c9521286a60",
+ *    short_plus_code: "MP7H+E2",
+ *    long_plus_code: "6E9AEFMP7H+E2FH",
+ *    virtual_code: "BB35E24B",
+ *    location_pic: "/media/a8952c9521286a60.jpeg",
+ *    latitude: 4.567889,
+ *    longitude: -12.098,
+ *    street_address: "",
+ *    city: "nairobi",
+ *    country: "kenya"
+ *  }]
+ *
+ */
+router.get('/:id/addresses/mobile', accessControl(['consumer', 'admin']), userController.fetchUserAddressesMobile);
+
+/**
  * @api {put} /users/password/update Update user password/pin
  * @apiVersion 1.0.0
  * @apiName UpdatePassword

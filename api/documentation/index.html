@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title> Anwani - API </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main.css" />
   </head>
@@ -18,23 +19,40 @@
           </ul>
         </nav>
       </header>
-      <section>
-        <ul>
-          <li>
-            <a href="/documentation/docs"> API Documentation <i class="fa fa-chevron-circle-right pull-right"></i></a>
-          </li>
-          <li>
-            <a href="/documentation/sdks"> SDK's <i class="fa fa-chevron-circle-right pull-right"></i></a>
-          </li>
-        </ul>
+      <section class="container">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <div class="col-md-12">
+              <h3>Login To Access API Docs</h3>
+              <form action="/documentation/login" method="POST">
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" name='email' class="form-control input-lg" id="email" placeholder="email">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" name='password' class="form-control input-lg" id="password" placeholder="Password">
+                </div>
+
+                <button type="submit" class="btn btn-success btn-block btn-lg">Submit</button>
+              </form>
+
+            </div>
+          </div>
+        <div class="col-md-4"></div>
+      </div>
       </section>
       <footer>
         <p>
-          <span> &copy; <span id="footer-date">2015</span> anwani.io </span>
+          <span> &copy; <span id="footer-date"></span></span>
           <span> - </span>
-          <span> A Product of Coders4Africa. </span>
+          <span> Coders4Africa. </span>
         </p>
       </footer>
     </main>
+    <script>
+      document.getElementById('footer-date').innerHTML = (new Date()).getFullYear()
+    </script>
   </body>
 </html>

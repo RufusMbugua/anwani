@@ -43,17 +43,6 @@ module.exports = {
 
   SECURITY_ANSWER_SALT: 'ylHUMaVrS0dpcO/+nT+6aAVVGcRJzuSocoLJDoJgBlaAYTdq',
 
-  OPEN_ENDPOINTS: [
-    /\/media\/.*/,
-    /\/documentation\/.*/,
-    /\/subscribers\/verify\/.*/,
-    '/users/login',
-    '/users/signup',
-    '/subscribers/login',
-    '/subscribers/signup',
-    '/users/password/update',
-    '/',
-  ],
   MEDIA: {
     FILE_SIZE: 2 * 1024 * 1024, // 1MB,
     URL: API_URL + '/media/',

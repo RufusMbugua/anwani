@@ -63,7 +63,8 @@ var router  = express.Router();
  *    longitude: -12.098,
  *    street_address: "",
  *    city: "nairobi",
- *    country: "kenya"
+ *    country: "kenya",
+ *    shared: true
  *  }]
  *
  */
@@ -126,7 +127,8 @@ router.get('/search', accessControl(['*']), addressController.search);
  *    longitude: -12.098,
  *    street_address: "",
  *    city: "nairobi",
- *    country: "kenya"
+ *    country: "kenya",
+ *    shared: false
  *  }
  *
  */
@@ -165,7 +167,8 @@ router.post('/create', accessControl(['*']), addressController.create);
  *    longitude: -12.098,
  *    street_address: "",
  *    city: "nairobi",
- *    country: "kenya"
+ *    country: "kenya",
+ *    shared: false
  *  }
  */
 router.get('/:id', accessControl(['*']), addressController.fetchOne);
@@ -202,7 +205,8 @@ router.get('/:id', accessControl(['*']), addressController.fetchOne);
  *    longitude: -12.098,
  *    street_address: "",
  *    city: "nairobi",
- *    country: "kenya"
+ *    country: "kenya",
+ *    shared: false
  *  }
  */
 router.put('/:id', accessControl(['*']), addressController.update);
@@ -244,7 +248,8 @@ router.put('/:id', accessControl(['*']), addressController.update);
  *      longitude: -12.098,
  *      street_address: "",
  *      city: "nairobi",
- *      country: "kenya"
+ *      country: "kenya",
+ *      shared: false
  *    }]
  *  }
  *
@@ -283,14 +288,15 @@ router.get('/', accessControl(['subscriber', 'admin']), addressController.fetchA
  *    longitude: -12.098,
  *    street_address: "",
  *    city: "nairobi",
- *    country: "kenya"
+ *    country: "kenya",
+ *    shared: false
  *  }
  *
  */
-router.delete('/:id', accessControl(['*']), addressController.delete);
+router.delete('/:id', accessControl(['admin']), addressController.delete);
 
 /**
- * @api {put} /addresses/:id/archive Archive an address
+ * @api {post} /addresses/:id/archive Archive an address
  * @apiVersion 1.0.0
  * @apiName Archive
  * @apiGroup address
@@ -321,10 +327,11 @@ router.delete('/:id', accessControl(['*']), addressController.delete);
  *    longitude: -12.098,
  *    street_address: "",
  *    city: "nairobi",
- *    country: "kenya"
+ *    country: "kenya",
+ *    shared: false
  *  }
  */
-router.put('/:id/archive', accessControl(['*']), addressController.archive);
+router.post('/:id/archive', accessControl(['*']), addressController.archive);
 
 // Expose address Router
 module.exports = router;

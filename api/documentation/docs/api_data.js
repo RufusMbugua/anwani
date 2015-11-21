@@ -1458,7 +1458,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Response Example:",
-          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  virtual_code: \"BB35E24B\",\n  latitude: 4.567889,\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\"\n}",
+          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  virtual_code: \"BB35E24B\",\n  latitude: 4.567889,\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\",\n  shared: false\n}",
           "type": "json"
         }
       ]
@@ -1635,7 +1635,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Response Example:",
-          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  virtual_code: \"BB35E24B\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  latitude: 4.567889,\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\"\n}",
+          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  virtual_code: \"BB35E24B\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  latitude: 4.567889,\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\",\n  shared: false\n}",
           "type": "json"
         }
       ]
@@ -1736,7 +1736,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Response Example:",
-          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  virtual_code: \"BB35E24B\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  latitude: 4.567889,\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\"\n}",
+          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  virtual_code: \"BB35E24B\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  latitude: 4.567889,\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\",\n  shared: false\n}",
           "type": "json"
         }
       ]
@@ -1837,7 +1837,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Response Example:",
-          "content": "{\n  \"total_pages\": 1,\n  \"total_docs_count\": 0,\n  \"docs\": [{\n     \"_id\" : \"556e1174a8952c9521286a60\",\n    user: \"556e1174a8952c9521286a60\",\n    short_plus_code: \"MP7H+E2\",\n    long_plus_code: \"6E9AEFMP7H+E2FH\",\n    virtual_code: \"BB35E24B\",\n    location_pic: \"/media/a8952c9521286a60.jpeg\",\n    latitude: 4.567889,\n    longitude: -12.098,\n    street_address: \"\",\n    city: \"nairobi\",\n    country: \"kenya\"\n  }]\n}",
+          "content": "{\n  \"total_pages\": 1,\n  \"total_docs_count\": 0,\n  \"docs\": [{\n     \"_id\" : \"556e1174a8952c9521286a60\",\n    user: \"556e1174a8952c9521286a60\",\n    short_plus_code: \"MP7H+E2\",\n    long_plus_code: \"6E9AEFMP7H+E2FH\",\n    virtual_code: \"BB35E24B\",\n    location_pic: \"/media/a8952c9521286a60.jpeg\",\n    latitude: 4.567889,\n    longitude: -12.098,\n    street_address: \"\",\n    city: \"nairobi\",\n    country: \"kenya\",\n    shared: false\n  }]\n}",
           "type": "json"
         }
       ]
@@ -1938,7 +1938,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Response Example:",
-          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  virtual_code: \"BB35E24B\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  latitude: 4.567889,\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\"\n}",
+          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  virtual_code: \"BB35E24B\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  latitude: 4.567889,\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\",\n  shared: false\n}",
           "type": "json"
         }
       ]
@@ -2039,7 +2039,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Response Example:",
-          "content": "[{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  virtual_code: \"BB35E24B\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  latitude: 4.567889,\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\"\n}]",
+          "content": "[{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  virtual_code: \"BB35E24B\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  latitude: 4.567889,\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\",\n  shared: true\n}]",
           "type": "json"
         }
       ]
@@ -2140,12 +2140,341 @@ define({ "api": [
       "examples": [
         {
           "title": "Response Example:",
-          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  latitude: 4.567889,\n  virtual_code: \"BB35E24B\",\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\"\n}",
+          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  user: \"556e1174a8952c9521286a60\",\n  short_plus_code: \"MP7H+E2\",\n  long_plus_code: \"6E9AEFMP7H+E2FH\",\n  location_pic: \"/media/a8952c9521286a60.jpeg\",\n  latitude: 4.567889,\n  virtual_code: \"BB35E24B\",\n  longitude: -12.098,\n  street_address: \"\",\n  city: \"nairobi\",\n  country: \"kenya\",\n  shared: false\n}",
           "type": "json"
         }
       ]
     },
     "filename": "routes/addresses.js",
     "groupTitle": "address"
+  },
+  {
+    "type": "post",
+    "url": "/logs/create",
+    "title": "Create Log",
+    "version": "1.0.0",
+    "name": "CreateNew",
+    "group": "log",
+    "description": "<p>Create an Log.</p> ",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "source",
+            "description": "<p>log source</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type",
+            "description": "<p>log type</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "info",
+            "description": "<p>log info</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request Example",
+          "content": "{\n      \"source\": \"android\",\n      \"type\": \"bug\",\n      \"info\": {...}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>log id</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Boolean</p> ",
+            "optional": false,
+            "field": "solved",
+            "description": "<p>solved</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "source",
+            "description": "<p>log source</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type",
+            "description": "<p>log type</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "info",
+            "description": "<p>log info</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response Example:",
+          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  \"source\": \"android\",\n  \"type\": \"bug\",\n  \"info\": {...}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/logs.js",
+    "groupTitle": "log"
+  },
+  {
+    "type": "get",
+    "url": "/logs?page=<RESULTS_PAGE>&per_page=<RESULTS_PER_PAGE>",
+    "title": "Get logs collection",
+    "version": "1.0.0",
+    "name": "FetchAll",
+    "group": "log",
+    "description": "<p>Get a collection of logs. The endpoint has pagination out of the box. Use these params to query with pagination: <code>page=&lt;RESULTS_PAGE</code> and <code>per_page=&lt;RESULTS_PER_PAGE&gt;</code>.</p> ",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>log id</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Boolean</p> ",
+            "optional": false,
+            "field": "solved",
+            "description": "<p>solved</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "source",
+            "description": "<p>log source</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type",
+            "description": "<p>log type</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "info",
+            "description": "<p>log info</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response Example:",
+          "content": "{\n  \"total_pages\": 1,\n  \"total_docs_count\": 0,\n  \"docs\": [{\n     \"_id\" : \"556e1174a8952c9521286a60\",\n     \"solved\": true,\n     \"source\": \"android\",\n     \"type\": \"bug\",\n     \"info\": {...}\n  }]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/logs.js",
+    "groupTitle": "log"
+  },
+  {
+    "type": "get",
+    "url": "/logs/:id",
+    "title": "Get log",
+    "version": "1.0.0",
+    "name": "Get",
+    "group": "log",
+    "description": "<p>Get a log with the given id</p> ",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>log id</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Boolean</p> ",
+            "optional": false,
+            "field": "solved",
+            "description": "<p>solved</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "source",
+            "description": "<p>log source</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type",
+            "description": "<p>log type</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "info",
+            "description": "<p>log info</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response Example:",
+          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  \"source\": \"android\",\n  \"type\": \"bug\",\n  \"info\": {...}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/logs.js",
+    "groupTitle": "log"
+  },
+  {
+    "type": "get",
+    "url": "/logs/search?<QUERY_TYPE>=<QUERY_VALUE>",
+    "title": "Search for logs",
+    "version": "1.0.0",
+    "name": "Search",
+    "group": "log",
+    "description": "<p>Search for logs. The types can be mixed and matched i.e <code>/logs/search?solved=true&amp;source=android</code> The following list contains list query types that can be used:</p> <ul> <li>source: android|web|api</li> <li>type: bug|error|crash|activity</li> <li>solved: true|false</li> <li>start_date: ISO_FORMATTED_DATE(&quot;'2015-11-06T11:34:06.929Z'&quot;)</li> </ul> ",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>log id</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Boolean</p> ",
+            "optional": false,
+            "field": "solved",
+            "description": "<p>solved</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "source",
+            "description": "<p>log source</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type",
+            "description": "<p>log type</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "info",
+            "description": "<p>log info</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response Example:",
+          "content": "[{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  \"source\": \"android\",\n  \"type\": \"bug\",\n  \"info\": {...}\n}]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/logs.js",
+    "groupTitle": "log"
+  },
+  {
+    "type": "put",
+    "url": "/logs/:id",
+    "title": "Update log",
+    "version": "1.0.0",
+    "name": "Update",
+    "group": "log",
+    "description": "<p>Update a log with the given id</p> ",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>log id</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Boolean</p> ",
+            "optional": false,
+            "field": "solved",
+            "description": "<p>solved</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "source",
+            "description": "<p>log source</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "type",
+            "description": "<p>log type</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "info",
+            "description": "<p>log info</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response Example:",
+          "content": "{\n  \"_id\" : \"556e1174a8952c9521286a60\",\n  \"source\": \"android\",\n  \"type\": \"bug\",\n  \"info\": {...}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/logs.js",
+    "groupTitle": "log"
   }
 ] });
