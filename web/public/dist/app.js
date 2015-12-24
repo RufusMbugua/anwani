@@ -75,104 +75,115 @@ app.controller("accountCtrl", ['$scope', '$filter', '$timeout', '$state',
 ]);
 ;// I control the main demo.
 app.controller("homeCtrl", ['$scope', '$filter', '$timeout', '$state',
-  'Restangular', '$http', '$rootScope', '$translate',
+  'Restangular', '$http', '$rootScope', '$translate','$window',
   function(scope, filter, timeout, state, Restangular, $http, rootScope,
-    translate) {
+           translate,window) {
     scope.lang = 'en_US';
     scope.toggleLanguage = function toggleLanguage(item) {
       translate.use(item);
       rootScope.currentLanguage=item;
-      console.log(rootScope.currentLanguage)
     };
+    check_language();
+    function check_language(){
+      var lang = window.navigator.language || window.navigator.userLanguage;
+      if(lang=='fr' || lang=='fre'||lang=='fre_FRE'){
+        scope.toggleLanguage('fre_FRE')
+        scope.lang = 'fre_FRE';
+      }
+      else if(lang=='en'||lang=='en-US'||lang=='en_GB'||lang=='en_US'){
+        scope.toggleLanguage('en_US')
+        scope.lang = 'en_US';
+      }
+    }
 
     scope.features=[
       {
         title:'Free Registration',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:true,
         business:true,
         government:true
       },
       {
         title:'Create Address',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:true,
         business:true,
         government:true
       },
       {
         title:'Manage Address',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:true,
         business:true,
         government:true
       },
       {
         title:'Customize Address',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:false,
         business:true,
         government:true
       },
       {
         title:'Basic Dashboard',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:true,
         business:true,
         government:true
       },
       {
         title:'Advanced Dashboard',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:false,
         business:true,
         government:true
       },
       {
         title:'Advanced Analytics',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:false,
         business:true,
         government:true
       },
       {
         title:'Share Address',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:true,
         business:true,
         government:true
       },
       {
         title:'Add Maps View',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:true,
         business:true,
         government:true
       },
       {
         title:'App Assistance',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:false,
         business:true,
         government:false
       },
       {
         title:'Database Access/Storage',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:false,
         business:true,
         government:true
       },
       {
         title:'Multi Location Management',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:false,
         business:true,
         government:true
       },
       {
         title:'Population Data Tool',
-        subtitle:'Lorem ipsum dolor sit amet',
+
         citizen:false,
         business:false,
         government:true
@@ -181,35 +192,162 @@ app.controller("homeCtrl", ['$scope', '$filter', '$timeout', '$state',
   }
 ]);
 ;app.directive('isActiveNav', ['$location', function($location) {
-  return {
-    restrict: 'A',
-    link: function(scope, element) {
-      scope.location = $location;
-      scope.$watch('location.path()', function(currentPath) {
-        if ('#' + currentPath == element[0].hash) {
-          element.parent().addClass('active');
-        } else {
-          element.parent().removeClass('active');
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+            scope.location = $location;
+            scope.$watch('location.path()', function(currentPath) {
+                if ('#' + currentPath == element[0].hash) {
+                    element.parent().addClass('active');
+                } else {
+                    element.parent().removeClass('active');
+                }
+            });
         }
-      });
-    }
-  };
+    };
 }]);
 
-app.directive('isActiveLink', ['$location', function($location) {
-  return {
-    restrict: 'A',
-    link: function(scope, element) {
-      scope.location = $location;
-      scope.$watch('location.path()', function(currentPath) {
-        if ('#' + currentPath == element[0].hash) {
-          element.addClass('active');
-        } else {
-          element.removeClass('active');
+/**
+ * @ngdoc   responsiveHeader
+ * @description Converting a Table to a List
+ */
+app.directive('responsiveHeader',[function() {
+    return {
+        restrict: 'A',
+        //transclude: false,
+        link: function (scope, element) {
+            var header=[];
+            var titles=[];
+            var size=0;
+            $("#price_list").on("loaded",function(){
+                $.each(element.find('tr'),function(index,value){
+                    header[index] = $.ResponsiveHeader(value);
+                    size = header[index].length;
+                });
+                for(x=0;x<size;x++){
+                    titles[x]="";
+                }
+                $.each(header,function(index,value){
+                    $.each(value,function(i,v){
+                        if(typeof v!=undefined){
+                            titles[i]+= v;
+                        }
+                    })
+                });
+                $.each(titles,function(index,value){
+                    if(index>0){
+                        $('li[name="header[' + (index - 1) + ']"]').html(value);
+                    }
+                });
+            })
         }
-      });
     }
-  };
+
+}])
+
+app.directive('responsiveFooter',[function() {
+    return {
+        restrict: 'A',
+        //transclude: false,
+        link: function (scope, element) {
+            var header=[];
+            var titles=[];
+            var size=0;
+            $("#price_list").on("loaded",function(){
+                $.each(element.find('tr'),function(index,value){
+                    header[index] = $.ResponsiveFooter(value);
+                    size = header[index].length;
+                });
+                for(x=0;x<size;x++){
+                    titles[x]="";
+                }
+                $.each(header,function(index,value){
+                    $.each(value,function(i,v){
+                        if(typeof v!=undefined){
+                            titles[i]+= v;
+                        }
+                    })
+                });
+                $.each(titles,function(index,value){
+                    if(index>0){
+                        $('li[name="footer[' + (index - 1) + ']"]').html(value);
+                    }
+                });
+            })
+        }
+    }
+
+}]);
+
+app.directive('responsiveRow',['$timeout',function($timeout){
+    return {
+        restrict: 'A',
+        //transclude: false,
+        link: function (scope, element) {
+            var ul=[];
+            var lists=[];
+            var size=0;
+            if(scope.$last){
+                $timeout(function(){
+                    // Convert Table to Array
+                    $.each(element.parent().find('tr'),function(index,value){
+                        lists[index]=$.ResponsiveTable(value);
+                        size=lists[index].length;
+                    });
+
+                    for(x=0;x<size-1;x++){
+                        ul[x]=[];
+                    }
+                    $.each(lists,function(index,value){
+                        var first_column;
+                        $.each(value,function(i,v){
+                            if(i==0){
+                                first_column=v;
+                            }
+                            else{
+                                ul[i-1][index]=[first_column,v];
+                            }
+
+                        })
+                    });
+                    //Build Lists
+                    var final_list='';
+                    $.each(ul,function(index,value){
+
+                        var output='<ul class="responsiveCollection"><li name="header['+index+']" class="header"></li>';
+                        $.each(value,function(i,v){
+                            output+='<div class="responsiveSection">';
+                            $.each(v,function(ii,val){
+
+                                output+=val;
+                            })
+                            output+='</div>';
+                        })
+                        final_list+=output+'<li name="footer['+index+']" class="footer"></li></ul>';
+
+                    });
+                    $('#price_list').html(final_list);
+                    $('#price_list').trigger('loaded');
+                });
+
+            }
+        }
+    }
+}]);
+app.directive('isActiveLink', ['$location', function($location) {
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+            scope.location = $location;
+            scope.$watch('location.path()', function(currentPath) {
+                if ('#' + currentPath == element[0].hash) {
+                    element.addClass('active');
+                } else {
+                    element.removeClass('active');
+                }
+            });
+        }
+    };
 }]);
 ;app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -608,10 +746,10 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
   $templateCache.put("../public/app/partials/home/pricing.html",
     "<div ui-view=\"header\" autoscroll=\"true\"></div>\n" +
     "<div class=\"row padded\">\n" +
-    "    <div class=\"col-md-12 white padded\">\n" +
+    "    <div class=\"col-md-12 white padded hidden-sm hidden-xs\">\n" +
     "        <div class=\"inner\">\n" +
     "            <table class=\"features-table table retable\" data-retable-type=\"row\">\n" +
-    "                <thead>\n" +
+    "                <thead responsive-header>\n" +
     "                <tr>\n" +
     "                    <th></th>\n" +
     "                    <th translate>pricing.header.first.one</th>\n" +
@@ -621,7 +759,8 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                <tr>\n" +
     "                    <th></th>\n" +
     "                    <th class=\"citizen\" translate>pricing.header.second.one</th>\n" +
-    "                    <th class=\"business\" translate>pricing.header.second.two</th>\n" +
+    "                    <th></th>\n" +
+    "                    <!--<th class=\"business\" translate>pricing.header.second.two</th>-->\n" +
     "                    <th class=\"government\" translate>pricing.header.second.three</th>\n" +
     "                </tr>\n" +
     "                <tr>\n" +
@@ -632,10 +771,10 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                </tr>\n" +
     "                </thead>\n" +
     "                <tbody>\n" +
-    "                <tr ng-repeat=\"feature in features\">\n" +
+    "                <tr responsive-row ng-repeat=\"feature in features\">\n" +
     "                    <td style=\"text-align: left;width:25%\">\n" +
     "                        <div ng-bind=\"feature.title\"></div>\n" +
-    "                        <div ng-bind=\"feature.subtitle\" class=\"gray-text\"></div>\n" +
+    "                        <!--<div ng-bind=\"feature.subtitle\" class=\"gray-text\"></div>-->\n" +
     "                    </td>\n" +
     "                    <td valign=\"middle\">\n" +
     "                        <i ng-if=\"feature.citizen\" class=\"ion-checkmark citizen\"></i>\n" +
@@ -648,7 +787,8 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                    </td>\n" +
     "                </tr>\n" +
     "                </tbody>\n" +
-    "                <tfoot>\n" +
+    "                <tfoot responsive-footer>\n" +
+    "                <tr>\n" +
     "                <td></td>\n" +
     "                <td>\n" +
     "                    <a class=\"btn btn-dark citizen\" translate>pricing.footer.one</a>\n" +
@@ -659,11 +799,20 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                <td>\n" +
     "                    <a href=\"mailto:contact@coders4africa.com?subject=Anwani Government\" class=\"btn btn-dark government\" translate>pricing.footer.three</a>\n" +
     "                </td>\n" +
+    "                </tr>\n" +
     "                </tfoot>\n" +
     "            </table>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div class=\"col-md-12 white hidden-md hidden-lg\">\n" +
+    "            <div id=\"price_list\"></div>\n" +
+    "    </div>\n" +
     "</div>\n" +
+    "<script>\n" +
+    "    $(document).ready(function(){\n" +
+    "//        $('table').ResponsiveTable();\n" +
+    "    })\n" +
+    "</script>\n" +
     "<div ui-view=\"sub-header\"></div>\n" +
     "<div ui-view=\"footer\"></div>");
 }]);

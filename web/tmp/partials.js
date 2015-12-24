@@ -310,10 +310,10 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
   $templateCache.put("../public/app/partials/home/pricing.html",
     "<div ui-view=\"header\" autoscroll=\"true\"></div>\n" +
     "<div class=\"row padded\">\n" +
-    "    <div class=\"col-md-12 white padded\">\n" +
+    "    <div class=\"col-md-12 white padded hidden-sm hidden-xs\">\n" +
     "        <div class=\"inner\">\n" +
     "            <table class=\"features-table table retable\" data-retable-type=\"row\">\n" +
-    "                <thead>\n" +
+    "                <thead responsive-header>\n" +
     "                <tr>\n" +
     "                    <th></th>\n" +
     "                    <th translate>pricing.header.first.one</th>\n" +
@@ -323,7 +323,8 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                <tr>\n" +
     "                    <th></th>\n" +
     "                    <th class=\"citizen\" translate>pricing.header.second.one</th>\n" +
-    "                    <th class=\"business\" translate>pricing.header.second.two</th>\n" +
+    "                    <th></th>\n" +
+    "                    <!--<th class=\"business\" translate>pricing.header.second.two</th>-->\n" +
     "                    <th class=\"government\" translate>pricing.header.second.three</th>\n" +
     "                </tr>\n" +
     "                <tr>\n" +
@@ -334,10 +335,10 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                </tr>\n" +
     "                </thead>\n" +
     "                <tbody>\n" +
-    "                <tr ng-repeat=\"feature in features\">\n" +
+    "                <tr responsive-row ng-repeat=\"feature in features\">\n" +
     "                    <td style=\"text-align: left;width:25%\">\n" +
     "                        <div ng-bind=\"feature.title\"></div>\n" +
-    "                        <div ng-bind=\"feature.subtitle\" class=\"gray-text\"></div>\n" +
+    "                        <!--<div ng-bind=\"feature.subtitle\" class=\"gray-text\"></div>-->\n" +
     "                    </td>\n" +
     "                    <td valign=\"middle\">\n" +
     "                        <i ng-if=\"feature.citizen\" class=\"ion-checkmark citizen\"></i>\n" +
@@ -350,7 +351,8 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                    </td>\n" +
     "                </tr>\n" +
     "                </tbody>\n" +
-    "                <tfoot>\n" +
+    "                <tfoot responsive-footer>\n" +
+    "                <tr>\n" +
     "                <td></td>\n" +
     "                <td>\n" +
     "                    <a class=\"btn btn-dark citizen\" translate>pricing.footer.one</a>\n" +
@@ -361,11 +363,20 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                <td>\n" +
     "                    <a href=\"mailto:contact@coders4africa.com?subject=Anwani Government\" class=\"btn btn-dark government\" translate>pricing.footer.three</a>\n" +
     "                </td>\n" +
+    "                </tr>\n" +
     "                </tfoot>\n" +
     "            </table>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div class=\"col-md-12 white hidden-md hidden-lg\">\n" +
+    "            <div id=\"price_list\"></div>\n" +
+    "    </div>\n" +
     "</div>\n" +
+    "<script>\n" +
+    "    $(document).ready(function(){\n" +
+    "//        $('table').ResponsiveTable();\n" +
+    "    })\n" +
+    "</script>\n" +
     "<div ui-view=\"sub-header\"></div>\n" +
     "<div ui-view=\"footer\"></div>");
 }]);

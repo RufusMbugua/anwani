@@ -61,6 +61,10 @@ app.config(
         }
     ]);
 
+/**
+ * @ngdoc run
+ * @description Sets the HTTP Headers including but not limited to the Authentication TOKEN.
+ */
 app.run(
     ['localStorageService', '$rootScope','$http','$state','Permission',
         function (localStorageService, rootScope,http,state,Permission) {
@@ -135,3 +139,14 @@ app.run(
             rootScope.state = state;
         }
     ]);
+
+/**
+ * @ngdoc       constant
+ * @name        'CONSTANTS'
+ * @description The URL that points to the instance of the API
+ */
+app.factory('CONSTANTS',function(){
+    return {
+        API_URL:'http://anwaniapi.mybluemix.net/'
+    }
+});

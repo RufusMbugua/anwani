@@ -1384,22 +1384,22 @@ pre {
   .container-fluid:after {
     clear: both; }
 
-.row {
+.row, #price_list ul.responsiveCollection li.header, #price_list ul.responsiveCollection li.footer, #price_list ul.responsiveCollection .responsiveSection {
   margin-left: -15px;
   margin-right: -15px; }
-  .row:before, .row:after {
+  .row:before, #price_list ul.responsiveCollection li.header:before, #price_list ul.responsiveCollection li.footer:before, #price_list ul.responsiveCollection .responsiveSection:before, .row:after, #price_list ul.responsiveCollection li.header:after, #price_list ul.responsiveCollection li.footer:after, #price_list ul.responsiveCollection .responsiveSection:after {
     content: " ";
     display: table; }
-  .row:after {
+  .row:after, #price_list ul.responsiveCollection li.header:after, #price_list ul.responsiveCollection li.footer:after, #price_list ul.responsiveCollection .responsiveSection:after {
     clear: both; }
 
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, table.features-table .btn-dark, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, table.features-table .btn-dark:hover, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, #price_list ul.responsiveCollection li.responsiveTable, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .btn-dark, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px; }
 
-.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, #price_list ul.responsiveCollection li.responsiveTable, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
   float: left; }
 
 .col-xs-1 {
@@ -1417,7 +1417,7 @@ pre {
 .col-xs-5 {
   width: 41.66667%; }
 
-.col-xs-6 {
+.col-xs-6, #price_list ul.responsiveCollection li.responsiveTable {
   width: 50%; }
 
 .col-xs-7 {
@@ -1712,7 +1712,7 @@ pre {
   .col-sm-offset-12 {
     margin-left: 100%; } }
 @media (min-width: 992px) {
-  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, table.features-table .btn-dark, .col-md-9, .col-md-10, table.features-table .btn-dark:hover, .col-md-11, .col-md-12 {
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .btn-dark, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
     float: left; }
 
   .col-md-1 {
@@ -1736,13 +1736,13 @@ pre {
   .col-md-7 {
     width: 58.33333%; }
 
-  .col-md-8, table.features-table .btn-dark {
+  .col-md-8, .btn-dark {
     width: 66.66667%; }
 
   .col-md-9 {
     width: 75%; }
 
-  .col-md-10, table.features-table .btn-dark:hover {
+  .col-md-10 {
     width: 83.33333%; }
 
   .col-md-11 {
@@ -1832,10 +1832,10 @@ pre {
   .col-md-offset-0 {
     margin-left: 0%; }
 
-  .col-md-offset-1, table.features-table .btn-dark:hover {
+  .col-md-offset-1 {
     margin-left: 8.33333%; }
 
-  .col-md-offset-2, table.features-table .btn-dark {
+  .col-md-offset-2, .btn-dark {
     margin-left: 16.66667%; }
 
   .col-md-offset-3 {
@@ -6081,11 +6081,15 @@ table.features-table {
       color: #3cbed5 !important; }
     table.features-table tbody td i.government {
       color: #354646 !important; }
-  table.features-table .btn-dark {
-    border-radius: 0;
-    color: white; }
-  table.features-table .btn-dark:hover {
-    color: white; }
+
+.btn-dark {
+  min-width: 66.66667% !important;
+  width: auto !important;
+  border-radius: 0;
+  color: white; }
+
+.btn-dark:hover {
+  color: white; }
 
 .mask {
   position: relative;
@@ -6127,6 +6131,56 @@ img.play {
 .btn-blue {
   color: #3cbed5; }
 
+#price_list {
+  color: black; }
+  #price_list ul.responsiveCollection:first-child {
+    padding-top: 4em; }
+  #price_list ul.responsiveCollection:last-child {
+    border-bottom: 0; }
+  #price_list ul.responsiveCollection {
+    display: block;
+    padding: 1em;
+    border-bottom: 2px solid #2C3E50; }
+    #price_list ul.responsiveCollection li.header, #price_list ul.responsiveCollection li.footer {
+      text-align: center;
+      list-style: none; }
+      #price_list ul.responsiveCollection li.header div:first-child, #price_list ul.responsiveCollection li.footer div:first-child {
+        font-size: 2em; }
+      #price_list ul.responsiveCollection li.header div, #price_list ul.responsiveCollection li.footer div {
+        padding: 0.5em 0; }
+      #price_list ul.responsiveCollection li.header div.citizen, #price_list ul.responsiveCollection li.footer div.citizen {
+        background: #f4a704 !important;
+        padding: 10px;
+        color: white;
+        text-align: center; }
+      #price_list ul.responsiveCollection li.header div.business, #price_list ul.responsiveCollection li.footer div.business {
+        background: #3cbed5 !important;
+        padding: 10px;
+        color: white;
+        text-align: center; }
+      #price_list ul.responsiveCollection li.header div.government, #price_list ul.responsiveCollection li.footer div.government {
+        background: #354646 !important;
+        padding: 10px;
+        color: white;
+        text-align: center; }
+    #price_list ul.responsiveCollection li.footer {
+      border-top: 0; }
+    #price_list ul.responsiveCollection .responsiveSection {
+      padding: 1em 0.5em;
+      border-bottom: 1px solid #ddd; }
+    #price_list ul.responsiveCollection li.responsiveTable {
+      padding: 0.5em 0;
+      list-style: none; }
+      #price_list ul.responsiveCollection li.responsiveTable i.citizen {
+        color: #f4a704 !important;
+        float: right; }
+      #price_list ul.responsiveCollection li.responsiveTable i.business {
+        color: #3cbed5 !important;
+        float: right; }
+      #price_list ul.responsiveCollection li.responsiveTable i.government {
+        color: #354646 !important;
+        float: right; }
+
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 @media (max-width: 767px) {
@@ -6146,7 +6200,7 @@ img.play {
     .banner .padded-top {
       padding-top: 1em; }
 
-  .about .row.white {
+  .about .row.white, .about #price_list ul.responsiveCollection li.white.header, #price_list ul.responsiveCollection .about li.white.header, .about #price_list ul.responsiveCollection li.white.footer, #price_list ul.responsiveCollection .about li.white.footer, .about #price_list ul.responsiveCollection .white.responsiveSection, #price_list ul.responsiveCollection .about .white.responsiveSection {
     padding-top: 12em !important; }
   .about .col-md-4.centered {
     margin: 2em 0 !important; }
@@ -6197,7 +6251,7 @@ img.play {
     .banner .padded-top {
       padding-top: 1em; }
 
-  .about .row.white {
+  .about .row.white, .about #price_list ul.responsiveCollection li.white.header, #price_list ul.responsiveCollection .about li.white.header, .about #price_list ul.responsiveCollection li.white.footer, #price_list ul.responsiveCollection .about li.white.footer, .about #price_list ul.responsiveCollection .white.responsiveSection, #price_list ul.responsiveCollection .about .white.responsiveSection {
     padding-top: 12em !important; }
   .about .col-md-4.centered {
     margin: 2em 0 !important; }

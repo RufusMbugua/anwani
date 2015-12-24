@@ -287,19 +287,18 @@ table.features-table{
       }
     }
   }
-  .btn-dark{
-    @extend .col-md-8;
-    @extend .col-md-offset-2;
-    border-radius:0;
-    color: white;
-  }
-  .btn-dark:hover{
-    @extend .col-md-10;
-    @extend .col-md-offset-1;
-    color:white;
-  }
 }
-
+.btn-dark{
+  @extend .col-md-8;
+  @extend .col-md-offset-2;
+  min-width:66.66667% !important;
+  width:auto !important;
+  border-radius:0;
+  color: white;
+}
+.btn-dark:hover{
+  color:white;
+}
 // Mask
 .mask{
   position: relative;
@@ -344,6 +343,76 @@ img.play{
 // Button Styles
 .btn-blue{
   color:$light_blue;
+}
+//Responsive Tables
+#price_list{
+  color:black;
+  ul.responsiveCollection:first-child{
+    padding-top:4em;
+  }
+  ul.responsiveCollection:last-child{
+    border-bottom:0;
+  }
+  ul.responsiveCollection{
+    display:block;
+    padding:1em;
+    border-bottom:2px solid $blue;
+    li.header,li.footer{
+      text-align:center;
+      list-style:none;
+      @extend .row;
+      div:first-child{
+        font-size:2em;
+      }
+      div{
+        padding:0.5em 0;
+      }
+      div.citizen{
+        background:#f4a704 !important;
+        padding:10px;
+        color:white;
+        text-align:center;
+      }
+      div.business{
+        background:#3cbed5 !important;
+        padding:10px;
+        color:white;
+        text-align:center;
+      }
+      div.government{
+        background:#354646 !important;
+        padding:10px;
+        color:white;
+        text-align:center;
+      }
+    }
+    li.footer{
+      border-top:0;
+    }
+    .responsiveSection{
+      padding:1em 0.5em;
+      @extend .row;
+      border-bottom:1px solid #ddd;
+    }
+    li.responsiveTable{
+      padding:0.5em 0;
+      list-style:none;
+      @extend .col-xs-6;
+
+      i.citizen{
+        color:#f4a704 !important;
+        float:right;
+      }
+      i.business{
+        color:#3cbed5 !important;
+        float:right;
+      }
+      i.government{
+        color:#354646 !important;
+        float:right;
+      }
+    }
+  }
 }
 // Media Queries
 /* Extra small devices (phones, less than 768px) */

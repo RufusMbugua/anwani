@@ -1,9 +1,9 @@
 <div ui-view="header" autoscroll="true"></div>
 <div class="row padded">
-    <div class="col-md-12 white padded">
+    <div class="col-md-12 white padded hidden-sm hidden-xs">
         <div class="inner">
             <table class="features-table table retable" data-retable-type="row">
-                <thead>
+                <thead responsive-header>
                 <tr>
                     <th></th>
                     <th translate>pricing.header.first.one</th>
@@ -13,7 +13,8 @@
                 <tr>
                     <th></th>
                     <th class="citizen" translate>pricing.header.second.one</th>
-                    <th class="business" translate>pricing.header.second.two</th>
+                    <th></th>
+                    <!--<th class="business" translate>pricing.header.second.two</th>-->
                     <th class="government" translate>pricing.header.second.three</th>
                 </tr>
                 <tr>
@@ -24,10 +25,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="feature in features">
+                <tr responsive-row ng-repeat="feature in features">
                     <td style="text-align: left;width:25%">
                         <div ng-bind="feature.title"></div>
-                        <div ng-bind="feature.subtitle" class="gray-text"></div>
+                        <!--<div ng-bind="feature.subtitle" class="gray-text"></div>-->
                     </td>
                     <td valign="middle">
                         <i ng-if="feature.citizen" class="ion-checkmark citizen"></i>
@@ -40,7 +41,8 @@
                     </td>
                 </tr>
                 </tbody>
-                <tfoot>
+                <tfoot responsive-footer>
+                <tr>
                 <td></td>
                 <td>
                     <a class="btn btn-dark citizen" translate>pricing.footer.one</a>
@@ -51,10 +53,19 @@
                 <td>
                     <a href="mailto:contact@coders4africa.com?subject=Anwani Government" class="btn btn-dark government" translate>pricing.footer.three</a>
                 </td>
+                </tr>
                 </tfoot>
             </table>
         </div>
     </div>
+    <div class="col-md-12 white hidden-md hidden-lg">
+            <div id="price_list"></div>
+    </div>
 </div>
+<script>
+    $(document).ready(function(){
+//        $('table').ResponsiveTable();
+    })
+</script>
 <div ui-view="sub-header"></div>
 <div ui-view="footer"></div>

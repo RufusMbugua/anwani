@@ -1,8 +1,8 @@
-app.controller('SubscribersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state',
-    function (scope, filterFilter,http,rootScope,state) {
+app.controller('SubscribersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state','CONSTANTS',
+    function (scope, filterFilter,http,rootScope,state,CONSTANTS) {
 
         scope.add = function add(){
-            http.post('http://anwani-devapi.c4asolution.com/subscribers/signup',scope.subscriber).then(function(result){
+            http.post(CONSTANTS.API_URL+'subscribers/signup',scope.subscriber).then(function(result){
                 console.log(result);
             });
         };
@@ -17,12 +17,12 @@ app.controller('SubscribersCtrl', ['$scope', 'filterFilter','$http','$rootScope'
 /**
  * Get Subscribers on RUN
  */
-app.run(['$http','$rootScope',function(http,rootScope){
+app.run(['$http','$rootScope','CONSTANTS',function(http,rootScope,CONSTANTS){
     if(rootScope.user) {
         get_subscribers();
     }
     function get_subscribers(){
-        http.get('http://anwani-devapi.c4asolution.com/subscribers?page=1&per_page=10'
+        http.get(CONSTANTS.API_URL+'subscribers'
         ).then(function(result){
                 rootScope.subscribers = result.data.docs;
             });

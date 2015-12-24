@@ -61,6 +61,10 @@ app.config(
         }
     ]);
 
+/**
+ * @ngdoc run
+ * @description Sets the HTTP Headers including but not limited to the Authentication TOKEN.
+ */
 app.run(
     ['localStorageService', '$rootScope','$http','$state','Permission',
         function (localStorageService, rootScope,http,state,Permission) {
@@ -134,7 +138,18 @@ app.run(
                 });
             rootScope.state = state;
         }
-    ]);;// lazyload config
+    ]);
+
+/**
+ * @ngdoc       constant
+ * @name        'CONSTANTS'
+ * @description The URL that points to the instance of the API
+ */
+app.factory('CONSTANTS',function(){
+    return {
+        API_URL:'http://anwaniapi.mybluemix.net/'
+    }
+});;// lazyload config
 
 app.constant('JQ_CONFIG', {
   easyPieChart: [
@@ -415,8 +430,8 @@ app.controller('AppCtrl', ['$scope',
  * @param $rootScope {service} Angular Root Scope Service
  * @param $state {service} UI Router State Service
  */
-app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state',
-    function (scope, filterFilter,http,rootScope,state) {
+app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state','CONSTANTS',
+    function (scope, filterFilter,http,rootScope,state,CONSTANTS) {
         /**
          * Add an address
          * @memberof AddressesCtrl
@@ -428,7 +443,7 @@ app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','
              * @param scope.address {object}
              *
              */
-            http.post('http://anwani-devapi.c4asolution.com/addresses/create',scope.address).then(function(result){
+            http.post(CONSTANTS.API_URL+'addresses/create',scope.address).then(function(result){
                 console.log(result);
             });
         };
@@ -454,7 +469,7 @@ app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','
             search_string=scope.search_data.string;
             criteria[category]=search_string;
 
-            http.get('http://anwani-devapi.c4asolution.com/addresses/search',{params:criteria})
+            http.get(CONSTANTS.API_URL+'addresses/search',{params:criteria})
                 .then(function(result){
                     scope.results = result.data;
                 });
@@ -469,18 +484,12 @@ app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','
  * @param $http {service}
  * @param $rootScope {service}
  */
-app.run(['$http','$rootScope',function(http,rootScope){
+app.run(['$http','$rootScope','CONSTANTS',function(http,rootScope,CONSTANTS){
     get_addresses();
     function get_addresses(){
         if(rootScope.user){
-            http.get('http://anwani-devapi.c4asolution.com/addresses',
-                {
-                    params:{
-                        page:1,
-                        per_page:10
-                    }
-                }
-            ).then(function(result){
+            http.get(CONSTANTS.API_URL+'addresses')
+                .then(function(result){
                     rootScope.addresses = result.data.docs;
                 });
         }
@@ -2422,8 +2431,8 @@ app.controller('FormValidationCtrl', ['$scope', function($scope) {
  * @param Permission {service} Sets Access Permissions based on the user type
  *
  */
-app.controller('LoginCtrl', ['$scope', '$http', '$state', 'localStorageService', '$rootScope','Permission',
-    function (scope, http, state, localStorageService, rootScope,Permission) {
+app.controller('LoginCtrl', ['$scope', '$http', '$state', 'localStorageService', '$rootScope','Permission','CONSTANTS',
+    function (scope, http, state, localStorageService, rootScope,Permission,CONSTANTS) {
         scope.subscriber = {};
         rootScope._subscriber = false;
         rootScope._admin = false;
@@ -2431,7 +2440,7 @@ app.controller('LoginCtrl', ['$scope', '$http', '$state', 'localStorageService',
         scope.login = function () {
             scope.authError = null;
             // Try to login
-            http.post('http://anwani-devapi.c4asolution.com/subscribers/login', scope.subscriber)
+            http.post(CONSTANTS.API_URL+'subscribers/login', scope.subscriber)
                 .then(function successCallback(response) {
                     if (!response.data.subscriber) {
                         scope.authError = 'Email or Password not right';
@@ -2470,27 +2479,21 @@ app.controller('LoginCtrl', ['$scope', '$http', '$state', 'localStorageService',
         };
 
         function get_users(){
-                http.get('http://anwani-devapi.c4asolution.com/users?page=1&per_page=10'
+                http.get(CONSTANTS.API_URL+'users'
                 ).then(function(result){
                         rootScope.users = result.data.docs;
                     });
 
         }
         function get_addresses(){
-                http.get('http://anwani-devapi.c4asolution.com/addresses',
-                    {
-                        params:{
-                            page:1,
-                            per_page:10
-                        }
-                    }
-                ).then(function(result){
+                http.get(CONSTANTS.API_URL+'addresses')
+                    .then(function(result){
                         rootScope.addresses = result.data.docs;
                     });
 
         }
         function get_subscribers(){
-            http.get('http://anwani-devapi.c4asolution.com/subscribers?page=1&per_page=10'
+            http.get(CONSTANTS+'subscribers'
             ).then(function(result){
                     rootScope.subscribers = result.data.docs;
                 });
@@ -2694,8 +2697,8 @@ app.controller('NotifyCtrl', function($scope,notify){
 });;'use strict';
 
 // signup controller
-app.controller('RegisterFormController', ['$scope', '$http', '$state', 'localStorageService', '$rootScope',
-    function (scope, http, state, localStorageService, rootScope) {
+app.controller('RegisterFormController', ['$scope', '$http', '$state', 'localStorageService', '$rootScope','CONSTANTS',
+    function (scope, http, state, localStorageService, rootScope,CONSTANTS) {
         scope.subscriber = {};
         scope.authError = null;
 
@@ -2705,7 +2708,7 @@ app.controller('RegisterFormController', ['$scope', '$http', '$state', 'localSto
         scope.register = function () {
             scope.authError = null;
             // Try to create
-            http.post('http://anwani-devapi.c4asolution.com/subscribers/signup', scope.subscriber)
+            http.post(CONSTANTS+API_URL+'subscribers/signup', scope.subscriber)
                 .then(function(response) {
                     if (!response.data) {
                         scope.authError = response;
@@ -2723,7 +2726,7 @@ app.controller('RegisterFormController', ['$scope', '$http', '$state', 'localSto
          */
         scope.registerSubscriber = function registerSubscriber(){
 
-            http.post('http://anwani-devapi.c4asolution.com/subscribers/signup', scope.subscriber)
+            http.post(CONSTANTS.API_URL+'subscribers/signup', scope.subscriber)
                 .then(function(response) {
                     if (!response.data) {
                         scope.authError = response;
@@ -3285,11 +3288,11 @@ app.controller('RickshawCtrl', ['$scope', '$interval', function($scope, $interva
 		$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
 		$scope.currentPage = 1;
 	}, true);
-}]);;app.controller('SubscribersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state',
-    function (scope, filterFilter,http,rootScope,state) {
+}]);;app.controller('SubscribersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state','CONSTANTS',
+    function (scope, filterFilter,http,rootScope,state,CONSTANTS) {
 
         scope.add = function add(){
-            http.post('http://anwani-devapi.c4asolution.com/subscribers/signup',scope.subscriber).then(function(result){
+            http.post(CONSTANTS.API_URL+'subscribers/signup',scope.subscriber).then(function(result){
                 console.log(result);
             });
         };
@@ -3304,12 +3307,12 @@ app.controller('RickshawCtrl', ['$scope', '$interval', function($scope, $interva
 /**
  * Get Subscribers on RUN
  */
-app.run(['$http','$rootScope',function(http,rootScope){
+app.run(['$http','$rootScope','CONSTANTS',function(http,rootScope,CONSTANTS){
     if(rootScope.user) {
         get_subscribers();
     }
     function get_subscribers(){
-        http.get('http://anwani-devapi.c4asolution.com/subscribers?page=1&per_page=10'
+        http.get(CONSTANTS.API_URL+'subscribers'
         ).then(function(result){
                 rootScope.subscribers = result.data.docs;
             });
@@ -3508,280 +3511,7 @@ $scope.myData3 = [{name: "Moroni", age: 50},
 
  $scope.getPage();
 
-}]);;app.controller('UiGridDemoCtrl', ['$scope', 'uiGridConstants', function($scope, uiGridConstants) {
-    $scope.gridOptionsSimple = {
-        rowHeight: 36,
-        data: [
-          {
-              "name": "Ethel Price",
-              "gender": "female",
-              "company": "Enersol"
-          },
-          {
-              "name": "Claudine Neal",
-              "gender": "female",
-              "company": "Sealoud"
-          },
-          {
-              "name": "Beryl Rice",
-              "gender": "female",
-              "company": "Velity"
-          },
-          {
-              "name": "Wilder Gonzales",
-              "gender": "male",
-              "company": "Geekko"
-          },
-          {
-              "name": "Georgina Schultz",
-              "gender": "female",
-              "company": "Suretech"
-          },
-          {
-              "name": "Carroll Buchanan",
-              "gender": "male",
-              "company": "Ecosys"
-          },
-          {
-              "name": "Valarie Atkinson",
-              "gender": "female",
-              "company": "Hopeli"
-          },
-          {
-              "name": "Schroeder Mathews",
-              "gender": "male",
-              "company": "Polarium"
-          },
-          {
-              "name": "Lynda Mendoza",
-              "gender": "female",
-              "company": "Dogspa"
-          },
-          {
-              "name": "Sarah Massey",
-              "gender": "female",
-              "company": "Bisba"
-          },
-          {
-              "name": "Robles Boyle",
-              "gender": "male",
-              "company": "Comtract"
-          },
-          {
-              "name": "Evans Hickman",
-              "gender": "male",
-              "company": "Parleynet"
-          },
-          {
-              "name": "Dawson Barber",
-              "gender": "male",
-              "company": "Dymi"
-          },
-          {
-              "name": "Bruce Strong",
-              "gender": "male",
-              "company": "Xyqag"
-          },
-          {
-              "name": "Nellie Whitfield",
-              "gender": "female",
-              "company": "Exospace"
-          },
-          {
-              "name": "Jackson Macias",
-              "gender": "male",
-              "company": "Aquamate"
-          },
-          {
-              "name": "Pena Pena",
-              "gender": "male",
-              "company": "Quarx"
-          },
-          {
-              "name": "Lelia Gates",
-              "gender": "female",
-              "company": "Proxsoft"
-          },
-          {
-              "name": "Letitia Vasquez",
-              "gender": "female",
-              "company": "Slumberia"
-          },
-          {
-              "name": "Trevino Moreno",
-              "gender": "male",
-              "company": "Conjurica"
-          }
-        ]
-      };
-      
-      $scope.gridOptionsComplex = {
-        enableFiltering: true,
-        showFooter: true,
-        rowHeight: 36,
-        columnDefs: [
-          { name: 'name', aggregationType: uiGridConstants.aggregationTypes.count, width: 150 },
-          { name: 'gender', filter: { term: 'male' }, width: 150, enableCellEdit: false, 
-            cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
-              if (grid.getCellValue(row,col) === 'male') {
-                return 'blue';
-              } else if (grid.getCellValue(row,col) === 'female') {
-                return 'pink';
-              }
-            } 
-          },
-          { name: 'age', aggregationType: uiGridConstants.aggregationTypes.avg, width: 100 },
-          { name: 'company', enableFiltering: false, width: 200 }
-        ],
-        data: [
-          {
-              "name": "Ethel Price",
-              "gender": "female",
-              "company": "Enersol",
-              "age": 25
-          },
-          {
-              "name": "Claudine Neal",
-              "gender": "female",
-              "company": "Sealoud",
-              "age": 19
-          },
-          {
-              "name": "Beryl Rice",
-              "gender": "female",
-              "company": "Velity",
-              "age": 44
-          },
-          {
-              "name": "Wilder Gonzales",
-              "gender": "male",
-              "company": "Geekko",
-              "age": 26
-          },
-          {
-              "name": "Georgina Schultz",
-              "gender": "female",
-              "company": "Suretech",
-              "age": 53
-          },
-          {
-              "name": "Carroll Buchanan",
-              "gender": "male",
-              "company": "Ecosys",
-              "age": 64
-          },
-          {
-              "name": "Valarie Atkinson",
-              "gender": "female",
-              "company": "Hopeli",
-              "age": 35
-          },
-          {
-              "name": "Schroeder Mathews",
-              "gender": "male",
-              "company": "Polarium",
-              "age": 29
-          },
-          {
-              "name": "Lynda Mendoza",
-              "gender": "female",
-              "company": "Dogspa",
-              "age": 49
-          },
-          {
-              "name": "Sarah Massey",
-              "gender": "female",
-              "company": "Bisba",
-              "age": 40
-          },
-          {
-              "name": "Robles Boyle",
-              "gender": "male",
-              "company": "Comtract",
-              "age": 32
-          },
-          {
-              "name": "Evans Hickman",
-              "gender": "male",
-              "company": "Parleynet",
-              "age": 38
-          },
-          {
-              "name": "Dawson Barber",
-              "gender": "male",
-              "company": "Dymi",
-              "age": 21
-          },
-          {
-              "name": "Bruce Strong",
-              "gender": "male",
-              "company": "Xyqag",
-              "age": 61
-          },
-          {
-              "name": "Nellie Whitfield",
-              "gender": "female",
-              "company": "Exospace",
-              "age": 54
-          },
-          {
-              "name": "Jackson Macias",
-              "gender": "male",
-              "company": "Aquamate",
-              "age": 49
-          },
-          {
-              "name": "Pena Pena",
-              "gender": "male",
-              "company": "Quarx",
-              "age": 25
-          },
-          {
-              "name": "Lelia Gates",
-              "gender": "female",
-              "company": "Proxsoft",
-              "age": 54
-          },
-          {
-              "name": "Alfred Oscar",
-              "gender": "male",
-              "company": "Transprop",
-              "age": 34
-          },
-          {
-              "name": "John Alfred",
-              "gender": "male",
-              "company": "Haymans",
-              "age": 70
-          },
-          {
-              "name": "Leonie Warren",
-              "gender": "female",
-              "company": "Hilltop",
-              "age": 25
-          },
-          {
-              "name": "Belinda Gosford",
-              "gender": "female",
-              "company": "Archison",
-              "age": 42
-          },
-          {
-              "name": "Tracey Misoni",
-              "gender": "female",
-              "company": "Verizona",
-              "age": 34
-          },
-          {
-              "name": "Trevino Moreno",
-              "gender": "male",
-              "company": "Conjurica",
-              "age": 31
-          }
-        ]
-      };
-}]);
-;app.controller('MessagesDropDownCtrl', ['$scope', '$http',
+}]);;app.controller('MessagesDropDownCtrl', ['$scope', '$http',
   function ($scope, $http) {
     $http.get('../data/messages.json').success(function(data) {
       $scope.messages = data;
@@ -4014,7 +3744,8 @@ app.controller('NotificationsDropDownCtrl', ['$scope', '$http',
  * @param $state {service} UI Router State Service
  */
 app.controller('UsersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state',
-    function (scope, filterFilter,http,rootScope,state) {
+    'CONSTANTS',
+    function (scope, filterFilter,http,rootScope,state,CONSTANTS) {
 
         /**
          * Add a user
@@ -4022,7 +3753,7 @@ app.controller('UsersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$sta
          * @function add
          */
         scope.add = function add(){
-            http.post('http://anwani-devapi.c4asolution.com/users/signup',scope.user).then(function(result){
+            http.post(CONSTANTS.API_URL+'users/signup',scope.user).then(function(result){
                 console.log(result);
             });
         };
@@ -4046,11 +3777,11 @@ app.controller('UsersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$sta
  * @param $http {service}
  * @param $rootScope {service}
  */
-app.run(['$http','$rootScope',function(http,rootScope){
+app.run(['$http','$rootScope','CONSTANTS',function(http,rootScope,CONSTANTS){
     get_users();
     function get_users(){
         if(rootScope.user){
-            http.get('http://anwani-devapi.c4asolution.com/users?page=1&per_page=10'
+            http.get(CONSTANTS.API_URL+'users'
             ).then(function(result){
                     rootScope.users = result.data.docs;
                 });
@@ -5580,10 +5311,10 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
   $templateCache.put("../public/app/partials/home/pricing.html",
     "<div ui-view=\"header\" autoscroll=\"true\"></div>\n" +
     "<div class=\"row padded\">\n" +
-    "    <div class=\"col-md-12 white padded\">\n" +
+    "    <div class=\"col-md-12 white padded hidden-sm hidden-xs\">\n" +
     "        <div class=\"inner\">\n" +
     "            <table class=\"features-table table retable\" data-retable-type=\"row\">\n" +
-    "                <thead>\n" +
+    "                <thead responsive-header>\n" +
     "                <tr>\n" +
     "                    <th></th>\n" +
     "                    <th translate>pricing.header.first.one</th>\n" +
@@ -5593,7 +5324,8 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                <tr>\n" +
     "                    <th></th>\n" +
     "                    <th class=\"citizen\" translate>pricing.header.second.one</th>\n" +
-    "                    <th class=\"business\" translate>pricing.header.second.two</th>\n" +
+    "                    <th></th>\n" +
+    "                    <!--<th class=\"business\" translate>pricing.header.second.two</th>-->\n" +
     "                    <th class=\"government\" translate>pricing.header.second.three</th>\n" +
     "                </tr>\n" +
     "                <tr>\n" +
@@ -5604,10 +5336,10 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                </tr>\n" +
     "                </thead>\n" +
     "                <tbody>\n" +
-    "                <tr ng-repeat=\"feature in features\">\n" +
+    "                <tr responsive-row ng-repeat=\"feature in features\">\n" +
     "                    <td style=\"text-align: left;width:25%\">\n" +
     "                        <div ng-bind=\"feature.title\"></div>\n" +
-    "                        <div ng-bind=\"feature.subtitle\" class=\"gray-text\"></div>\n" +
+    "                        <!--<div ng-bind=\"feature.subtitle\" class=\"gray-text\"></div>-->\n" +
     "                    </td>\n" +
     "                    <td valign=\"middle\">\n" +
     "                        <i ng-if=\"feature.citizen\" class=\"ion-checkmark citizen\"></i>\n" +
@@ -5620,7 +5352,8 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                    </td>\n" +
     "                </tr>\n" +
     "                </tbody>\n" +
-    "                <tfoot>\n" +
+    "                <tfoot responsive-footer>\n" +
+    "                <tr>\n" +
     "                <td></td>\n" +
     "                <td>\n" +
     "                    <a class=\"btn btn-dark citizen\" translate>pricing.footer.one</a>\n" +
@@ -5631,11 +5364,20 @@ angular.module("../public/app/partials/home/pricing.html", []).run(["$templateCa
     "                <td>\n" +
     "                    <a href=\"mailto:contact@coders4africa.com?subject=Anwani Government\" class=\"btn btn-dark government\" translate>pricing.footer.three</a>\n" +
     "                </td>\n" +
+    "                </tr>\n" +
     "                </tfoot>\n" +
     "            </table>\n" +
     "        </div>\n" +
     "    </div>\n" +
+    "    <div class=\"col-md-12 white hidden-md hidden-lg\">\n" +
+    "            <div id=\"price_list\"></div>\n" +
+    "    </div>\n" +
     "</div>\n" +
+    "<script>\n" +
+    "    $(document).ready(function(){\n" +
+    "//        $('table').ResponsiveTable();\n" +
+    "    })\n" +
+    "</script>\n" +
     "<div ui-view=\"sub-header\"></div>\n" +
     "<div ui-view=\"footer\"></div>");
 }]);

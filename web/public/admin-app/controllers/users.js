@@ -9,7 +9,8 @@
  * @param $state {service} UI Router State Service
  */
 app.controller('UsersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state',
-    function (scope, filterFilter,http,rootScope,state) {
+    'CONSTANTS',
+    function (scope, filterFilter,http,rootScope,state,CONSTANTS) {
 
         /**
          * Add a user
@@ -17,7 +18,7 @@ app.controller('UsersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$sta
          * @function add
          */
         scope.add = function add(){
-            http.post('http://anwani-devapi.c4asolution.com/users/signup',scope.user).then(function(result){
+            http.post(CONSTANTS.API_URL+'users/signup',scope.user).then(function(result){
                 console.log(result);
             });
         };
@@ -41,11 +42,11 @@ app.controller('UsersCtrl', ['$scope', 'filterFilter','$http','$rootScope','$sta
  * @param $http {service}
  * @param $rootScope {service}
  */
-app.run(['$http','$rootScope',function(http,rootScope){
+app.run(['$http','$rootScope','CONSTANTS',function(http,rootScope,CONSTANTS){
     get_users();
     function get_users(){
         if(rootScope.user){
-            http.get('http://anwani-devapi.c4asolution.com/users?page=1&per_page=10'
+            http.get(CONSTANTS.API_URL+'users'
             ).then(function(result){
                     rootScope.users = result.data.docs;
                 });

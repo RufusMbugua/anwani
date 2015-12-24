@@ -46,6 +46,8 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
+	<meta description="The APP that allows you to create a real address in less than a minute...">
+	<meta robots="index,follow">
 	<title ng-bind="title"></title>
 </head>
 <body style="height:auto !important">
@@ -93,6 +95,7 @@
 	<script src='libs/js/scrollReveal.js'></script>
 	<script src='libs/js/Chart.StackedBar.js'></script>
 	<script src='libs/js/retable.js'></script>
+	<script src="libs/js/responsive.table.js"></script>
 	<script src='libs/js/angular-google-analytics.js'></script>
 	<!--[if lt IE 9]>
 	<script src='libs/js/html5shiv.js'></script>

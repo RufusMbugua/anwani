@@ -1,11 +1,11 @@
 {
   "header": {
-    "nav": "Allez sur la navigation",
+    "nav": "Aller &agrave; la navigation",
     "links": {
       "one": "Accueil",
       "two": "A Propos",
-      "three": "Caracteristiques",
-      "four": "Se Connecter/S'Inscrire"
+      "three": "Caract&eacute;ristiques et Fonctionnalit&eacute;s",
+      "four": "SE CONNECTER/S'INSCRIRE"
     },
     "lang": "Langage"
   },
@@ -16,7 +16,7 @@
     },
     "col_2": {
       "title": "C'est simple",
-      "description": "Cr&eacute;er votre adresse ou voir celles qui existent d&eacute;j&aacute;",
+      "description": "Cr&eacute;er une addresse ou en trouver",
       "button": "D&eacute;marrer!",
       "option": "OU"
     }
@@ -24,70 +24,103 @@
   "about": {
     "first": {
       "share": "Partager sur",
-      "featured": "En premi&egrave;re page",
+      "featured": "En premier page",
       "title": "A propos de  Anwani",
       "description": ""
     },
     "second": {
       "col_1": {
-        "title": "Anwani Citizen",
-        "description": "Learn More"
+        "title": "Utilisateur de Anwani",
+        "description": "Lire la suite"
       },
       "col_2": {
-        "title": "Anwani Business",
-        "description": "Learn More"
+        "title": "Activit&eacute; sur Anwani",
+        "description": "Lire la suite"
       },
       "col_3": {
-        "title": "Anwani Government",
-        "description": "Learn More"
+        "title": "Administration de Anwani ",
+        "description": "Lire la suite"
       }
     }
   },
   "features": {
     "top": {
-      "title": "Anwani Features in detail",
-      "description": "Anwani is available in 3 versions for individual citizens, businesses and government."
+      "title": "Caract&eacute;ristiques et Fonctionnalit&eacute;s de l'application Anwani",
+      "description": ""
     },
     "first": {
       "col_1": {
-        "title": "Create Address",
-        "description": "Seamlessly create an address for any of your residences or businesses."
+        "title": "Cr&eacute;er votre addresse",
+        "description": "Cr&eacute;er une addresse pour votre r&eacute;sidence ou votre entreprise."
       },
       "col_2": {
-        "title": "View Existing Address",
-        "description": "Any individual, business or government entity can view their own address or an address that has been shared with them."
+        "title": "Visualisez l'adresse existante",
+        "description": "Visualisez votre propre addresse ou une addresse qui a &eacute;t&eacute; partag&eacute; avec vous."
       },
       "col_3": {
-        "title": "Manage Address",
-        "description": "Any individual, business or government entity can manage their multiple addresses anytime on the fly and have it updated in the cloud instantaneously."
+        "title": "Gestion de l'addresse",
+        "description": "Gestion et mise &agrave; jour de plusieurs addresses."
       }
     },
     "second": {
       "col_1": {
-        "title": "User & Share Address",
-        "description": "Organizing an event? Have an eCommerce site and want to start door-to-door delivery? It's simple, share your address in our app!"
+        "title": "Partage d'addresse",
+        "description": "Partage ton addresse avec un autre utilisateur d'Anwani."
       },
       "col_2": {
-        "title": "Add Locational Photo",
-        "description": "Not only can you create an address but you also have the option to add a picture of your residence/business in seconds."
+        "title": "Ajouter la photo de la localit&eacute;",
+        "description": "Ajouter la photo de votre r&eacute;sidence /Entreprise."
       },
       "col_3": {
-        "title": "Address Receipt",
-        "description": "Receive a digital receipt of your address creation and ensure no one else can duplicate or copy yours."
+        "title": "Adresse re�ue",
+        "description": "Recevoir une preuve num&eacute;rique de la propri&eacute;t&eacute; des adresses."
       }
     },
-    "tertiary": "* The Anwani business and government APPs are not available in the Google playstore. Please contact <a href='mailto:contact@coders4africa.com'>contact@coders4africa.com</a> to get those APPs."
+    "tertiary": "*Les applications commerciaux et gouvernementaux de Anwani ne sont pas disponibles dans le Playstore de Google. S'il vous pla&icirc;t contactez contact@coders4africa.com pour obtenir ces applications."
+  },
+  "pricing":
+  {
+    "header":
+    {
+      "first":
+      {
+        "one":"Utilisateur",
+        "two":"Activit&eacute;",
+        "three":"Administration"
+      },
+      "second":
+      {
+        "one":"Libre",
+        "two":"",
+        "three":"Reportage"
+      },
+      "third":
+      {
+        "one":"Parfait pour les individus (usage personnel,attribution de terrain / terres et enregistrements)",
+        "two":"Parfait pour les entreprises (e-commerce, livraison, de marketing porte-&agrave;-porte)",
+        "three":"Parfait pour les entit&eacute;s gouvernementaux (scrutin, recensement, s&eacute;curit&eacute;, collecte de donn&eacute;es"
+      }
+    },
+    "body":
+    {
+    },
+    "footer":
+    {
+      "one":"ESSAYEZ MAINTENANT",
+      "two":"CONTACTEZ NOUS",
+      "three":"CONTACTEZ NOUS"
+    }
   },
   "footer": {
     "col_1": {
-      "description": "Se Connecter avec Anwani"
+      "description": "Connectez-vous &agrave; Anwani"
     },
     "col_2": {
       "description": "Recevoir l'application Anwani"
     },
     "col_3": {
-      "description": "Tous droits reserv&eacute;s � Anwani App 2015"
+      "description": "Tous droits r&eacute;serv&eacute; &agrave; l'application Anwani 2015"
     }
   },
-  "partners": "Nos Partenaires"
+"partners": "Nos Partenaires"
 }

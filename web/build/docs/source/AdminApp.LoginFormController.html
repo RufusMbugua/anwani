@@ -99,7 +99,7 @@ app.controller('LoginFormController', ['$scope', '$http', '$state', 'localStorag
                 });
         };
         function get_users(){
-                http.get('http://anwani-devapi.c4asolution.com/users?page=1&per_page=10'
+                http.get('http://anwani-devapi.c4asolution.com/users'
                 ).then(function(result){
                         rootScope.users = result.data.docs;
                     });
@@ -117,7 +117,7 @@ app.controller('LoginFormController', ['$scope', '$http', '$state', 'localStorag
                     });
         };
         function get_subscribers(){
-            http.get('http://anwani-devapi.c4asolution.com/subscribers?page=1&per_page=10'
+            http.get('http://anwani-devapi.c4asolution.com/subscribers'
             ).then(function(result){
                     rootScope.subscribers = result.data.docs;
                 });

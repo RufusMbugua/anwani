@@ -8,8 +8,8 @@
  * @param $rootScope {service} Angular Root Scope Service
  * @param $state {service} UI Router State Service
  */
-app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state',
-    function (scope, filterFilter,http,rootScope,state) {
+app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','$state','CONSTANTS',
+    function (scope, filterFilter,http,rootScope,state,CONSTANTS) {
         /**
          * Add an address
          * @memberof AddressesCtrl
@@ -21,7 +21,7 @@ app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','
              * @param scope.address {object}
              *
              */
-            http.post('http://anwani-devapi.c4asolution.com/addresses/create',scope.address).then(function(result){
+            http.post(CONSTANTS.API_URL+'addresses/create',scope.address).then(function(result){
                 console.log(result);
             });
         };
@@ -47,7 +47,7 @@ app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','
             search_string=scope.search_data.string;
             criteria[category]=search_string;
 
-            http.get('http://anwani-devapi.c4asolution.com/addresses/search',{params:criteria})
+            http.get(CONSTANTS.API_URL+'addresses/search',{params:criteria})
                 .then(function(result){
                     scope.results = result.data;
                 });
@@ -62,18 +62,12 @@ app.controller('AddressesCtrl', ['$scope', 'filterFilter','$http','$rootScope','
  * @param $http {service}
  * @param $rootScope {service}
  */
-app.run(['$http','$rootScope',function(http,rootScope){
+app.run(['$http','$rootScope','CONSTANTS',function(http,rootScope,CONSTANTS){
     get_addresses();
     function get_addresses(){
         if(rootScope.user){
-            http.get('http://anwani-devapi.c4asolution.com/addresses',
-                {
-                    params:{
-                        page:1,
-                        per_page:10
-                    }
-                }
-            ).then(function(result){
+            http.get(CONSTANTS.API_URL+'addresses')
+                .then(function(result){
                     rootScope.addresses = result.data.docs;
                 });
         }
